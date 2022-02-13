@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,29 +24,41 @@ import lombok.Setter;
 @Table(name = "pais")
 public class PaisEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
-	private String imagen;
+    private String imagen;
 
-	private String denominacion;
+    private String denominacion;
 
-	@Column(name = "cant_habitantes")
-	private Long cantidadHabitantes;
+    @Column(name = "cant_habitantes")
+    private Long cantidadHabitantes;
 
-	private Long superficie;
+    private Long superficie;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "continente_id", insertable = false, updatable = false)
-	private ContinenteEntity continente;
+    @ManyToOne(cascade = CascadeType.ALL)//Muchos paises para un continente
+    @JoinColumn(name = "continente_id", insertable = false, updatable = false)//Nombre de la columna que relaciona a pais con continente
+    private ContinenteEntity continente;// El atributo continente le indica a hibernate con que tabla debe relacion a pais.
 
-	@Column(name = "continente_id", nullable = false)
-	private Long continenteId;
+    @Column(name = "continente_id", nullable = false)
+    private Long continenteId;
 
-	@ManyToMany(
-
-			cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "icon_pais", joinColumns = @JoinColumn(name = "icon_id"))
-	private Set<IconEntity> icons = new HashSet<>();
+    @ManyToMany(// Varios paises pueden tener varios iconos.Esto quiere decir que existen dos colecciones en esta relacion, por lo que debe crear una tercera tabla que las relaciones,
+    cascade = {CascadeType.PERSIST, CascadeType.MERGE})// Apuntes en la clase continente
+    @JoinTable(name = "icon_pais", joinColumns = @JoinColumn(name = "pais_id"))//Define el nombre de la tabla intermedia que sea crea y define el nombre de la columna que la relaciona.
+    private Set<IconEntity> icons = new HashSet<>();//El atributo le dice a hibernate con que tabla lo va a relacion, y esta es una coleccion.
 }
+
+//Apuntes: Entiendo que el dueno deberia ser Continente, pero como la relacion many pertenece a pais, la FK queda en su tabla, luego es dueno.
+//Esto es porque todos los continentes tiene varios paises, luego no puedo repetir continentes para agregar la FK de los paises que le pertenecen.
+//Pero si puedo agregar la FK de cada continente al crear cada pais para saber a donde pertenece cada uno.
+//////
+//insertable = false: No se puede insertar un valor
+//updatable = false: El valor no puede ser modificado.
+
+
+//Consultar si el Type.LAZY Y EAGER trabajan de igual forma en una apirest, se intento obtener un objeto seteando las diferentes colecciones y se obtuvo la misma respuesta.
+
+
+

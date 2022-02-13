@@ -15,10 +15,67 @@ import lombok.Setter;
 @Setter
 public class ContinenteEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-	private String imagen;
-	private String denominacion;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    private String imagen;
+    private String denominacion;
 
 }
+
+
+//////////CHALLENGE A ENTREGAR 
+//@Getter
+//@Setter
+//@Entity
+//@Table(name = "movies")
+//public class MovieEntity {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    @Column(name = "id_movies")
+//    private Long id;
+//    private String imagen;
+//    private String titulo;
+//    @Column(name = "fecha_de_creacion")
+//    @DateTimeFormat(pattern = "yyyy/MM/dd")
+//    private LocalDate fechaDeCreacion;
+//    private String calificacion; //1 a 5
+//
+//    @Column(name = "character_id")
+//    @ManyToMany(// Una pelicula tiene muchos actores, y un actor está en muchas peliculas.
+//            cascade = {
+//                CascadeType.PERSIST,// Hace que la persitencia sea tanto de la duena como de las hijas.
+//                                       Si persiste las peliculas, persiste a los personajes.
+//                CascadeType.MERGE,},//Entiendo que actualiza los estados de los atributos de la tabla, en donde este se repite,
+//                                      y los devuelve siempre y cuando existan.  
+//                                      Y sino existe, los crea y entiendo que devuelve.  
+//            fetch = FetchType.LAZY)// Carga perezosa, la carga solo cuando es requerida/Por default un ManyToMany es LAZY, no haria falta en este caso
+
+
+      //Personaliza la creacion de la tabla intermedia.
+//    @JoinTable(
+//            name = "movies_characters",// Define el nombre de la tabla
+//            joinColumns = @JoinColumn(name = "id_movie"),// El id que relaciona a entidad en la que estamos con la tabla
+//            inverseJoinColumns = @JoinColumn(name = "id_character"))//El id que relaciona a la otra entidad con la tabla
+//    private List<CharacterEntity> movieCharacters;// Este atributo es el que le indica con que tabla es la relacion.
+//
+//    @ManyToOne(cascade = {cascade = CascadeType.ALL})
+//    private GenreEntity movieGenres;
+
+//}
+////APUNTES////
+//CascadeType.PERSIST: Cuando una entidad es persistida, su entidad relacionada debe ser persistida también. 
+//
+//CascadeType.REMOVE: Cuando una entidad es removida, su entidad relacionada debe ser removida también. 
+//
+//CascadeType.REFRESH: Cuando una entidad es refrescada, su entidad relacionada debe ser refrescada también. 
+//
+//CascadeType.MERGE: Cuando una entidad es actualizada, su entidad relacionada debe ser actualizada también. 
+//
+//*Encuentre un objeto adjunto con la misma identificación y actualícelo.
+//-->Si existe, actualice y devuelva el objeto ya adjunto.
+//-->Si no existe inserte el nuevo registro en la base de datos.
+////
+//CascadeType.ALL: Cuando una entidad es persistida, removida, refrescada o actualizada,
+//su entidad relacionada debe ser persistida, removida, refrescada o actualizada también. 

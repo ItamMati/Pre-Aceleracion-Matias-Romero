@@ -24,25 +24,26 @@ import lombok.Setter;
 @Table(name = "icon")
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE icon SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
 public class IconEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
-	private String imagen;
-	private String denominacion;
+    private String imagen;
+    private String denominacion;
 
-	@Column(name = "fecha_creacion")
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private LocalDate fechaCreacion;
+    @Column(name = "fecha_creacion")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private LocalDate fechaCreacion;
 
-	private Long altura;
-	private String historia;
-	private boolean deleted = Boolean.FALSE;
+    private Long altura;
+    private String historia;
+    private boolean deleted = Boolean.FALSE;
 
-	@ManyToMany(mappedBy = "icons", cascade = CascadeType.ALL)
-	private List<PaisEntity> paises = new ArrayList<>();
+    @ManyToMany(mappedBy = "icons", cascade = CascadeType.ALL)//Varios iconos pueden estar en varios paises//Por default es Type.LAZY
+    private List<PaisEntity> paises = new ArrayList<>();//Este atributo tipo coleccion es el que indica con que tabla debe relacionarse.
 }
+
+//Apuntes: mappedBy indica que la entidad está siendo mapeada a traves del atributo icons por otra entidad que pasa a ser duena, pues en ManyToMany no hay dueno de por si, 
+//esto es para que no se creen dos tablas, ya que en hibernate existe solo la unidireccionalidad.
