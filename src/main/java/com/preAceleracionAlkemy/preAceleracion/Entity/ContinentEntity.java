@@ -13,7 +13,7 @@ import lombok.Setter;
 @Table(name = "continente")
 @Getter
 @Setter
-public class ContinenteEntity {
+public class ContinentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

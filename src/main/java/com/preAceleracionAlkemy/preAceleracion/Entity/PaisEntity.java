@@ -39,7 +39,7 @@ public class PaisEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)//Muchos paises para un continente
     @JoinColumn(name = "continente_id", insertable = false, updatable = false)//Nombre de la columna que relaciona a pais con continente
-    private ContinenteEntity continente;// El atributo continente le indica a hibernate con que tabla debe relacion a pais.
+    private ContinentEntity continente;// El atributo continente le indica a hibernate con que tabla debe relacion a pais.
 
     @Column(name = "continente_id", nullable = false)
     private Long continenteId;
