@@ -44,10 +44,10 @@ public class MovieEntity {
             cascade = {
                 CascadeType.PERSIST,// Hace que la persitencia sea tanto de la duena como de las hijas.
 //                                       Si persiste las peliculas, persiste a los personajes.
-                CascadeType.MERGE,},//Entiendo que actualiza los estados de los atributos de la tabla, en donde este se repite,
+                CascadeType.MERGE,}//Entiendo que actualiza los estados de los atributos de la tabla, en donde este se repite,
 //                                      y los devuelve siempre y cuando existan.  
 //                                      Y sino existe, los crea y entiendo que devuelve.  
-            fetch = FetchType.LAZY)// Carga perezosa, la carga solo cuando es requerida/Por default un ManyToMany es LAZY, no haria falta en este caso
+             )// Carga perezosa, la carga solo cuando es requerida/Por default un ManyToMany es LAZY, no haria falta en este caso
 
 
 //      Personaliza la creacion de la tabla intermedia.
@@ -57,7 +57,7 @@ public class MovieEntity {
             inverseJoinColumns = @JoinColumn(name = "id_character"))//El id que relaciona a la otra entidad con la tabla
     private Set<CharacterEntity> movieCharacters;// Este atributo es el que le indica con que tabla es la relacion.
 
-    @ManyToOne(cascade = CascadeType.ALL)//Por defecto la carga es Eager, no hace falta colocarla.
+    @ManyToOne(cascade = CascadeType.ALL)//Por defecto la carga es Eager, no hace falta colocarla al no ser tantos generos lo que existen.
     @JoinColumn(name = "genre_id")//La tabla movie va a tener una FK "genre_id:" por eso en está relación es la dueña.
     private GenreEntity movieGenres;
     
