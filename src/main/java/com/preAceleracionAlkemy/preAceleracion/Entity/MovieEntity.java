@@ -57,7 +57,7 @@ public class MovieEntity {
             inverseJoinColumns = @JoinColumn(name = "id_character"))//El id que relaciona a la otra entidad con la tabla
     private Set<CharacterEntity> movieCharacters;// Este atributo es el que le indica con que tabla es la relacion.
 
-    @ManyToOne(cascade = CascadeType.ALL)//Por defecto la carga es Eager, no hace falta colocarla al no ser tantos generos lo que existen.
+    @ManyToOne//Por defecto la carga es Eager, no hace falta colocarla al no ser tantos generos lo que existen.
     @JoinColumn(name = "genre_id")//La tabla movie va a tener una FK "genre_id:" por eso en está relación es la dueña.
     private GenreEntity movieGenres;
     
@@ -79,3 +79,4 @@ public class MovieEntity {
 ////
 //CascadeType.ALL: Cuando una entidad es persistida, removida, refrescada o actualizada,
 //su entidad relacionada debe ser persistida, removida, refrescada o actualizada también. 
+
