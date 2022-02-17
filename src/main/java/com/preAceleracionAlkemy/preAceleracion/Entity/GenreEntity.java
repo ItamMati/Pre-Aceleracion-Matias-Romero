@@ -1,4 +1,4 @@
-package com.preAceleracionAlkemy.preAceleracion.Entity;
+package com.preAceleracionAlkemy.preAceleracion.entity;
 
 
 import javax.persistence.Entity;
