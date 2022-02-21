@@ -1,5 +1,6 @@
 package com.preAceleracionAlkemy.preAceleracion.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class GenreEntity {
     private String imageUrl;
 
     @OneToMany(mappedBy = "movieGenres")
+    @JsonIgnore
     private Set<MovieEntity> movies;
 
 }

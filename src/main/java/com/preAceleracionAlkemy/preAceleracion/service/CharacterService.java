@@ -1,9 +1,11 @@
 package com.preAceleracionAlkemy.preAceleracion.service;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDetailsDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDetailsDtoResponse;
 import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDto;
 import java.util.List;
 import java.util.Set;
+import org.springframework.web.bind.annotation.PathVariable;
 
 public interface CharacterService {
 
@@ -11,7 +13,7 @@ public interface CharacterService {
     
 //    List<CharacterDto> getCharacterList();
 
-    CharacterDetailsDto getCharacterDetails(Long id);
+    CharacterDetailsDtoResponse getCharacterDetails(Long id);
     
     CharacterDetailsDto save(CharacterDetailsDto characterDetailsDto);
     

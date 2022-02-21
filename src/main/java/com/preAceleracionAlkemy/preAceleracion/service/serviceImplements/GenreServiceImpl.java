@@ -14,18 +14,12 @@ public class GenreServiceImpl implements GenreService {
     @Autowired
     private GenreRepository genreRepository;
     
-    
-    @Override
-    public Optional<GenreEntity> findById(Long id){
-        
-        
-        return genreRepository.findById(id);
-    }
+  
     
      public GenreEntity handleFindById(Long id) {
         Optional<GenreEntity> toBeFound = genreRepository.findById(id);
         if (!toBeFound.isPresent()) {
-            throw new ParamNotFound("No Character for id: " + id);
+            throw new ParamNotFound("No Genre for id: " + id);
         }
         return toBeFound.get();
     }

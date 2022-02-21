@@ -1,6 +1,7 @@
 package com.preAceleracionAlkemy.preAceleracion.controller;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDetailsDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDetailsDtoResponse;
 import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDto;
 import com.preAceleracionAlkemy.preAceleracion.service.CharacterService;
 import java.util.List;
@@ -38,13 +39,13 @@ public class CharacterController {
     }
 
     @GetMapping("/details/{id}")
-    public ResponseEntity<CharacterDetailsDto> getCharacterDetailsDtoById(@PathVariable Long id) {
-        CharacterDetailsDto characterDetails = characterService.getCharacterDetails(id);
+    public ResponseEntity<CharacterDetailsDtoResponse> getCharacterDetailsDtoById(@PathVariable Long id) {
+        CharacterDetailsDtoResponse characterDetails = characterService.getCharacterDetails(id);
         return ResponseEntity.status(HttpStatus.OK).body(characterDetails);
     }
 
     // == POST ==	
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<CharacterDetailsDto> save(@RequestBody CharacterDetailsDto newCharacter) {
         CharacterDetailsDto createdChar = characterService.save(newCharacter);
         return ResponseEntity.status(HttpStatus.OK).body(createdChar);

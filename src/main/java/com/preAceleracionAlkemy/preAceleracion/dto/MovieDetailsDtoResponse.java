@@ -1,7 +1,10 @@
 package com.preAceleracionAlkemy.preAceleracion.dto;
 
+import com.preAceleracionAlkemy.preAceleracion.entity.CharacterEntity;
 import com.preAceleracionAlkemy.preAceleracion.entity.GenreEntity;
+import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import java.time.LocalDate;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +19,6 @@ public class MovieDetailsDtoResponse {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate dateOfCreation;
     private String calification; //1 a 5
-    private GenreEntity genre;
+     private Set<CharacterEntity> movieCharacters;
 
 }

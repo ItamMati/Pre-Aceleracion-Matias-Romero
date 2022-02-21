@@ -26,4 +26,7 @@ public class CharacterDetailsDto {
     
     private Set<MovieEntity> characterMovies = new HashSet();
     
+     private Long idMovie;
+    
+    
 }

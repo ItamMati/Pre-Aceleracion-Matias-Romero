@@ -1,5 +1,6 @@
 package com.preAceleracionAlkemy.preAceleracion.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Getter
 @Setter
 @Entity
-@SQLDelete(sql= "UPDATE movies SET deleted = true WHERE id=?")// Se debe declarar para aplicar el SoftDelete
+@SQLDelete(sql = "UPDATE movies SET deleted = true WHERE id=?")// Se debe declarar para aplicar el SoftDelete
 @Where(clause = "deleted=false")// Esta etiqueta sirve para que no liste los objetos a los cuales se les aplico el softDelete
 @Table(name = "movies")
 public class MovieEntity {
@@ -41,8 +42,8 @@ public class MovieEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate dateOfCreation;
     private String calification; //1 a 5
-    
-    private  boolean deleted = Boolean.FALSE; //atributo que se agrega para trabajar con el softDelete
+
+    private boolean deleted = Boolean.FALSE; //atributo que se agrega para trabajar con el softDelete
 
     @Column(name = "character_id")
     @ManyToMany(// Una pelicula tiene muchos actores, y un actor está en muchas peliculas.
@@ -59,16 +60,28 @@ public class MovieEntity {
             name = "movies_characters",// Define el nombre de la tabla
             joinColumns = @JoinColumn(name = "id_movie"),// El id que relaciona a entidad en la que estamos con la tabla
             inverseJoinColumns = @JoinColumn(name = "id_character"))//El id que relaciona a la otra entidad con la tabla
+    @JsonIgnore
     private Set<CharacterEntity> movieCharacters;// Este atributo es el que le indica con que tabla es la relacion.
 
     @ManyToOne(cascade = {
         CascadeType.PERSIST,
         CascadeType.MERGE,})//Por defecto la carga es Eager, no hace falta colocarla al no ser tantos generos lo que existen.
-    @JoinColumn(name = "genreId", insertable= false, updatable=false)//La tabla movie va a tener una FK "genre_id:" por eso en está relación es la dueña.
+    @JoinColumn(name = "genreId", insertable = false, updatable = false)//La tabla movie va a tener una FK "genre_id:" por eso en está relación es la dueña.
+
     private GenreEntity movieGenres;
-    
-    @Column(name="genreId", nullable=false)
+
+    @Column(name = "genreId", nullable = false)
     private Long genreId;
+
+    // :::: Methods ::::	
+    // Characters:
+    public void addCharacterToMovie(CharacterEntity charToBeAdded) {
+        this.movieCharacters.add(charToBeAdded);
+    }
+
+    public void removeCharacterFromMovie(CharacterEntity charToBeRemoved) {
+        this.movieCharacters.remove(charToBeRemoved);
+    }
 
 }
 

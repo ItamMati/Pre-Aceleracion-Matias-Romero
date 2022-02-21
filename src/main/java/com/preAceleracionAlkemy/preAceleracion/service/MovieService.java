@@ -7,6 +7,7 @@ import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import java.util.Date;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 public interface MovieService {
 
@@ -19,5 +20,7 @@ public interface MovieService {
     void deleteMovieById(Long id);
 
     MovieDetailsDto editMovieById(Long id, MovieDetailsDto movieToEdit);
+    
+   MovieEntity handleFindById(Long id);
 
 }

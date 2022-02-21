@@ -28,7 +28,7 @@ public class CharacterSpecification {
 
     }
 
-    public Specification<CharacterEntity> getByAge(CharacterFilterDto characterFilterDto) {//DEBO INTENTAR ENCONTRAR COMO UNIR DOS TABLAS DENTRO DE LAS ESPECIFICACIONES
+    public Specification<CharacterEntity> getByAge(CharacterFilterDto characterFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 
@@ -63,7 +63,7 @@ public class CharacterSpecification {
 
         return (root, query, criteriaBuilder) -> {
 
-            if (characterFilterDto.getMovies().isEmpty()) {
+            if (characterFilterDto.getMovies()==null) {
 
                 return criteriaBuilder.conjunction();
 

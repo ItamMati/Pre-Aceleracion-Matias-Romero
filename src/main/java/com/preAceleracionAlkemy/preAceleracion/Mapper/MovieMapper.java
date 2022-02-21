@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.preAceleracionAlkemy.preAceleracion.mapper;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
@@ -16,7 +11,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring", uses = {GenreEntity.class})
+@Mapper(componentModel = "spring", uses = {MovieMapper.class})
 public interface MovieMapper {
 
     @Mappings({
@@ -56,7 +51,7 @@ public interface MovieMapper {
         @Mapping(source = "title", target = "title"),
         @Mapping(source = "dateOfCreation", target = "dateOfCreation"),
         @Mapping(source = "calification", target = "calification"),
-        @Mapping(source = "movieGenres", target = "movieGenres")
+        @Mapping(source = "movieCharacters", target = "movieCharacters")
 
     })
 
@@ -65,7 +60,6 @@ public interface MovieMapper {
 //    @InheritInverseConfiguration      
 //    MovieEntity movieDetailsDtoResponseToEntity(MovieDetailsDtoResponse movieDetailsDto);
 //    List<MovieEntity> listMovieDetailsDtoResponseToListMovieEntity(List<MovieDetailsDtoResponse> movieDetailsDtoResponse);
-
 //    @InheritInverseConfiguration
 //    List<MovieDetailsDtoResponse> listMovieEntityToListMovieDetailsDtoResponse(List<MovieEntity> movie);
 }

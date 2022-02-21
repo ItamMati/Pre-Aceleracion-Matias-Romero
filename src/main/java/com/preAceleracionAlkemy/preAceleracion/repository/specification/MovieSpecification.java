@@ -26,7 +26,7 @@ public class MovieSpecification {
 
     }
 
-    public Specification<MovieEntity> getByGenre(MovieFilterDto movieFilterDto) {//DEBO INTENTAR ENCONTRAR COMO UNIR DOS TABLAS DENTRO DE LAS ESPECIFICACIONES
+    public Specification<MovieEntity> getByGenre(MovieFilterDto movieFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 
@@ -44,7 +44,7 @@ public class MovieSpecification {
 
     }
 
-    public Specification<MovieEntity> getByDate(MovieFilterDto movieFilterDto) {//DEBO INTENTAR ENCONTRAR COMO UNIR DOS TABLAS DENTRO DE LAS ESPECIFICACIONES
+    public Specification<MovieEntity> getByDate(MovieFilterDto movieFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 
@@ -60,7 +60,7 @@ public class MovieSpecification {
 
     }
 
-    public Specification<MovieEntity> getByOrder(MovieFilterDto movieFilterDto) {//DEBO INTENTAR ENCONTRAR COMO UNIR DOS TABLAS DENTRO DE LAS ESPECIFICACIONES
+    public Specification<MovieEntity> getByOrder(MovieFilterDto movieFilterDto) {
 
         String orderByField = "dateOfCreation";
 
