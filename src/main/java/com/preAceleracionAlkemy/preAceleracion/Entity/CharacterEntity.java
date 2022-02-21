@@ -24,7 +24,7 @@ import org.hibernate.annotations.Where;
 @Table(name = "characters")
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE movies SET deleted = true WHERE id=?")// Se debe declarar para aplicar el SoftDelete
+@SQLDelete(sql = "UPDATE characters SET deleted = true WHERE id=?")// Se debe declarar para aplicar el SoftDelete
 @Where(clause = "deleted=false")// Esta etiqueta sirve para que no liste los objetos a los cuales se les aplico el softDelete
 public class CharacterEntity {
     

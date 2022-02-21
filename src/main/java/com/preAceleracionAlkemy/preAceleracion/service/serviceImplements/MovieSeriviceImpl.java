@@ -32,7 +32,6 @@ public class MovieSeriviceImpl implements MovieService {
     @Autowired
     private MovieMapper movieMapper;
 
-
     @Autowired
     private GenreService genreService;
 
@@ -95,14 +94,16 @@ public class MovieSeriviceImpl implements MovieService {
 
     @Override
     public void deleteMovieById(Long id) {
-        movieRepository.deleteById(id);
+
+        MovieEntity exist = this.handleFindById(id);
+        movieRepository.deleteById(exist.getId());
     }
 
     // == ERROR HANDLING ==
     public MovieEntity handleFindById(Long id) {
         Optional<MovieEntity> toBeFound = movieRepository.findById(id);
         if (!toBeFound.isPresent()) {
-            throw new ParamNotFound("No Character for id: " + id);
+            throw new ParamNotFound("No Movie for id: " + id);
         }
         return toBeFound.get();
     }

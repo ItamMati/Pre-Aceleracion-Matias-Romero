@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,8 +39,8 @@ public class MovieController {
         return ResponseEntity.ok(movies);
 
     }
-    
-      @GetMapping("/details/{id}")
+
+    @GetMapping("/details/{id}")
     public ResponseEntity<MovieDetailsDtoResponse> getMovieDetailsDtoById(@PathVariable Long id) {
         MovieDetailsDtoResponse movieDetailsResponse = movieService.getMovieDetails(id);
         return ResponseEntity.status(HttpStatus.OK).body(movieDetailsResponse);
@@ -55,10 +56,18 @@ public class MovieController {
 
     }
 
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    // == PUT ==	
+    @PutMapping("/{id}")
+    public ResponseEntity<MovieDetailsDto> editCharacter(@PathVariable Long id, @RequestBody MovieDetailsDto charToEdit) {
+        MovieDetailsDto editedChar = movieService.editMovieById(id, charToEdit);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedChar);
+    }
 
+    // == DELETE ==	
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        movieService.deleteMovieById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-
     }
 
 }
