@@ -10,9 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Setter
 public class MovieDto {
 
-      private String image;
+    private String image;
     private String title;
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate dateOfCreation;
-    
+
 }

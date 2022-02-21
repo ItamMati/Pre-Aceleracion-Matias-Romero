@@ -47,6 +47,12 @@ public class MovieController {
 //        continente guardado
 
     }
+    
+      @GetMapping("/details/{id}")
+    public ResponseEntity<MovieDetailsDto> getCharacterDetailsDtoById(@PathVariable Long id) {
+        MovieDetailsDto characterDetails = movieService.getMovieDetails(id);
+        return ResponseEntity.status(HttpStatus.OK).body(characterDetails);
+    }
 
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 

@@ -5,6 +5,7 @@ import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDetailsDto;
 import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDto;
 import com.preAceleracionAlkemy.preAceleracion.dto.CharacterFilterDto;
 import com.preAceleracionAlkemy.preAceleracion.entity.CharacterEntity;
+import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;
 import com.preAceleracionAlkemy.preAceleracion.repository.CharacterRepository;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.CharacterSpecification;
 import com.preAceleracionAlkemy.preAceleracion.service.CharacterService;
@@ -30,8 +31,7 @@ public class CharacterServiceImpl implements CharacterService {
     @Autowired
     private CharacterSpecification characterSpecification;
 
- 
-        // == FILTERS ==
+    // == FILTERS ==
     @Override
     public List<CharacterDto> getByFilters(String name, Integer age, Double weight, Set<Long> movies) {
         CharacterFilterDto characterFilterDto = new CharacterFilterDto(name, age, weight, movies);
@@ -45,7 +45,6 @@ public class CharacterServiceImpl implements CharacterService {
         List<CharacterDto> resultDTO = characterMapper.listCharacterEntityToListCharacterDto(entityList);
         return resultDTO;
     }
-    
 
     @Override
     public CharacterDetailsDto getCharacterDetails(Long id) {
@@ -83,13 +82,11 @@ public class CharacterServiceImpl implements CharacterService {
         return resultDTO;
     }
 
-
-
     // == ERROR HANDLING ==
     public CharacterEntity handleFindById(Long id) {
         Optional<CharacterEntity> toBeFound = characterRepository.findById(id);
         if (!toBeFound.isPresent()) {
-//            throw new ParamNotFound("No Character for id: " + id);
+            throw new ParamNotFound("No Character for id: " + id);
         }
         return toBeFound.get();
     }

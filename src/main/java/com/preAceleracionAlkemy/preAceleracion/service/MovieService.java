@@ -13,10 +13,12 @@ public interface MovieService {
 
     List<MovieDto> getByFilter(String name, String genre, String order, Date date);
 
-    MovieDto getMovieDetails(Long id);
+    MovieDetailsDto getMovieDetails(Long id);
 
     void deleteMovieById(Long id);
 
     MovieDetailsDto editMovieById(Long id, MovieDetailsDto movieToEdit);
+    
+    
 
 }
