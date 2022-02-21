@@ -80,9 +80,9 @@ public class MovieSeriviceImpl implements MovieService {
 
         MovieEntity newMovie = movieMapper.movieDetailsDtoToEntity(movieDto);
 
-        GenreEntity genre = genreService.handleFindById(movieDto.getGenreId());
-
-        newMovie.setMovieGenres((genre));
+//        GenreEntity genre = genreService.handleFindById(movieDto.getGenreId());
+//
+//        newMovie.setMovieGenres((genre));
 
         MovieEntity entitySaved = movieRepository.save(newMovie);
 
