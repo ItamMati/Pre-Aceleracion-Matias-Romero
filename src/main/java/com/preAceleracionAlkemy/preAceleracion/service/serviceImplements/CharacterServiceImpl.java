@@ -30,16 +30,22 @@ public class CharacterServiceImpl implements CharacterService {
     @Autowired
     private CharacterSpecification characterSpecification;
 
-    // == GET ==
+ 
+        // == FILTERS ==
     @Override
-    public List<CharacterDto> getCharacterList() {
+    public List<CharacterDto> getByFilters(String name, Integer age, Double weight, Set<Long> movies) {
+        CharacterFilterDto characterFilterDto = new CharacterFilterDto(name, age, weight, movies);
 
-        List<CharacterEntity> characters = characterRepository.findAll();
+        List<CharacterEntity> entityList = characterRepository.findAll(
+                where((characterSpecification.getByName(characterFilterDto)).
+                        and(characterSpecification.getByAge(characterFilterDto).
+                                and(characterSpecification.getByWeight(characterFilterDto)))));
+//                                        and(characterSpecification.getByMovieId(characterFilterDto))))));
 
-        List<CharacterDto> characterDto = characterMapper.listCharacterEntityToListCharacterDto(characters);
-
-        return characterDto;
+        List<CharacterDto> resultDTO = characterMapper.listCharacterEntityToListCharacterDto(entityList);
+        return resultDTO;
     }
+    
 
     @Override
     public CharacterDetailsDto getCharacterDetails(Long id) {
@@ -77,20 +83,7 @@ public class CharacterServiceImpl implements CharacterService {
         return resultDTO;
     }
 
-    // == FILTERS ==
-    @Override
-    public List<CharacterDto> getByFilters(String name, Integer age, Double weight, Set<Long> movies) {
-        CharacterFilterDto characterFilterDto = new CharacterFilterDto(name, age, weight, movies);
 
-        List<CharacterEntity> entityList = characterRepository.findAll(
-                where((characterSpecification.getByName(characterFilterDto)).
-                        and(characterSpecification.getByAge(characterFilterDto).
-                                and(characterSpecification.getByWeight(characterFilterDto)))));
-//                                        and(characterSpecification.getByMovieId(characterFilterDto))))));
-
-        List<CharacterDto> resultDTO = characterMapper.listCharacterEntityToListCharacterDto(entityList);
-        return resultDTO;
-    }
 
     // == ERROR HANDLING ==
     public CharacterEntity handleFindById(Long id) {

@@ -5,6 +5,7 @@
  */
 package com.preAceleracionAlkemy.preAceleracion.mapper;
 
+import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import java.util.List;
@@ -20,8 +21,6 @@ public interface MovieMapper {
         @Mapping(source = "image", target = "image"),
         @Mapping(source = "title", target = "title"),
         @Mapping(source = "dateOfCreation", target = "dateOfCreation"),
-        @Mapping(source = "calification", target = "calification"),
-        @Mapping(source = "movieGenres", target = "movieGenres")
 
     })
     MovieEntity movieDtoToEntity(MovieDto movieDto);
@@ -33,5 +32,26 @@ public interface MovieMapper {
 
     @InheritInverseConfiguration
     List<MovieDto> listMovieEntityToListMovieDto(List<MovieEntity> movie);
+    
+    
+    
+      @Mappings({
+        @Mapping(source = "image", target = "image"),
+        @Mapping(source = "title", target = "title"),
+        @Mapping(source = "dateOfCreation", target = "dateOfCreation"),
+        @Mapping(source = "calification", target = "calification"),
+        @Mapping(source = "movieGenres", target = "movieGenres")
+
+    })
+    MovieEntity movieDetailsDtoToEntity(MovieDetailsDto movieDetailsDto);
+
+    @InheritInverseConfiguration
+    MovieDetailsDto movieEntityToMovieDetailsDto(MovieEntity movie);
+    
+    
+     List<MovieEntity> listMovieDetailsDtoToListMovieEntity(List<MovieDetailsDto> movieDetailsDto);
+
+    @InheritInverseConfiguration
+    List<MovieDetailsDto> listMovieEntityToListMovieDetailsDto(List<MovieEntity> movie);
 
 }

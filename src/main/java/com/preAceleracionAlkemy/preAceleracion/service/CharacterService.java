@@ -9,7 +9,7 @@ public interface CharacterService {
 
 //    List<CharacterDto> getCharacterList();
     
-    List<CharacterDto> getCharacterList();
+//    List<CharacterDto> getCharacterList();
 
     CharacterDetailsDto getCharacterDetails(Long id);
     

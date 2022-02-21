@@ -1,5 +1,6 @@
 package com.preAceleracionAlkemy.preAceleracion.service;
 
+import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import java.util.Date;
@@ -8,12 +9,14 @@ import org.springframework.http.ResponseEntity;
 
 public interface MovieService {
 
-    MovieDto save(MovieDto dto);
+    MovieDetailsDto save(MovieDetailsDto dto);
 
-    void delete(Long id);
-    
-     public List<MovieEntity> findAll();
+    List<MovieDto> getByFilter(String name, String genre, String order, Date date);
 
-    public List<MovieDto> getByFilter(String name, String genre, String order, Date date);
+    MovieDto getMovieDetails(Long id);
+
+    void deleteMovieById(Long id);
+
+    MovieDetailsDto editMovieById(Long id, MovieDetailsDto movieToEdit);
 
 }

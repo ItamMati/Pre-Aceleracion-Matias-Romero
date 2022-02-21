@@ -1,5 +1,6 @@
 package com.preAceleracionAlkemy.preAceleracion.controller;
 
+import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import com.preAceleracionAlkemy.preAceleracion.service.MovieService;
@@ -38,9 +39,9 @@ public class MovieController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<MovieDto> save(@RequestBody MovieDto movie) {
+    public ResponseEntity<MovieDetailsDto> save(@RequestBody MovieDetailsDto movie) {
 
-        MovieDto newMovie = movieService.save(movie);
+        MovieDetailsDto newMovie = movieService.save(movie);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newMovie);
 //        continente guardado
