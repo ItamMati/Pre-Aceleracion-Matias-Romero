@@ -9,6 +9,8 @@ public interface GenreService {
     
        
     
-    public Optional<GenreEntity> findById(Long id);
+   Optional<GenreEntity> findById(Long id);
+    
+   GenreEntity handleFindById(Long id);
     
 }

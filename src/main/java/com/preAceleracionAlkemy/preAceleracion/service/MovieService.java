@@ -1,6 +1,7 @@
 package com.preAceleracionAlkemy.preAceleracion.service;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDtoResponse;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import java.util.Date;
@@ -13,7 +14,7 @@ public interface MovieService {
 
     List<MovieDto> getByFilter(String name, String genre, String order, Date date);
 
-    MovieDto getMovieDetails(Long id);
+    MovieDetailsDtoResponse getMovieDetails(Long id);
 
     void deleteMovieById(Long id);
 

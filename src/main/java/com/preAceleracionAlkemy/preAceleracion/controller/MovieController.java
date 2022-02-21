@@ -1,6 +1,7 @@
 package com.preAceleracionAlkemy.preAceleracion.controller;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDtoResponse;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import com.preAceleracionAlkemy.preAceleracion.service.MovieService;
@@ -36,6 +37,12 @@ public class MovieController {
 
         return ResponseEntity.ok(movies);
 
+    }
+    
+      @GetMapping("/details/{id}")
+    public ResponseEntity<MovieDetailsDtoResponse> getMovieDetailsDtoById(@PathVariable Long id) {
+        MovieDetailsDtoResponse movieDetailsResponse = movieService.getMovieDetails(id);
+        return ResponseEntity.status(HttpStatus.OK).body(movieDetailsResponse);
     }
 
     @PostMapping("/save")

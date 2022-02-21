@@ -6,11 +6,14 @@
 package com.preAceleracionAlkemy.preAceleracion.service.serviceImplements;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDtoResponse;
 import com.preAceleracionAlkemy.preAceleracion.mapper.GenreMapper;
 import com.preAceleracionAlkemy.preAceleracion.mapper.MovieMapper;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieFilterDto;
+import com.preAceleracionAlkemy.preAceleracion.entity.GenreEntity;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
+import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;
 import com.preAceleracionAlkemy.preAceleracion.repository.MovieRepository;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.MovieSpecification;
 import com.preAceleracionAlkemy.preAceleracion.service.GenreService;
@@ -29,8 +32,9 @@ public class MovieSeriviceImpl implements MovieService {
     @Autowired
     private MovieMapper movieMapper;
 
+
     @Autowired
-    private GenreMapper genreMapper;
+    private GenreService genreService;
 
     @Autowired
     private MovieRepository movieRepository;
@@ -53,9 +57,9 @@ public class MovieSeriviceImpl implements MovieService {
     }
 
     @Override
-    public MovieDto getMovieDetails(Long id) {
+    public MovieDetailsDtoResponse getMovieDetails(Long id) {
         MovieEntity dbMovie = this.handleFindById(id);
-        MovieDto resultDTO = movieMapper.movieEntityToMovieDto(dbMovie);
+        MovieDetailsDtoResponse resultDTO = movieMapper.movieEntityToMovieDetailsDtoResponse(dbMovie);
         return resultDTO;
     }
 
@@ -72,11 +76,14 @@ public class MovieSeriviceImpl implements MovieService {
         return resultDTO;
     }
 
+    @Override
     public MovieDetailsDto save(MovieDetailsDto movieDto) {
 
         MovieEntity newMovie = movieMapper.movieDetailsDtoToEntity(movieDto);
 
-        newMovie.setMovieGenres(genreMapper.GenreDtoToGenreEntity(movieDto.getMovieGenres()));
+        GenreEntity genre = genreService.handleFindById(movieDto.getGenreId());
+
+        newMovie.setMovieGenres((genre));
 
         MovieEntity entitySaved = movieRepository.save(newMovie);
 
@@ -95,7 +102,7 @@ public class MovieSeriviceImpl implements MovieService {
     public MovieEntity handleFindById(Long id) {
         Optional<MovieEntity> toBeFound = movieRepository.findById(id);
         if (!toBeFound.isPresent()) {
-//            throw new ParamNotFound("No Character for id: " + id);
+            throw new ParamNotFound("No Character for id: " + id);
         }
         return toBeFound.get();
     }

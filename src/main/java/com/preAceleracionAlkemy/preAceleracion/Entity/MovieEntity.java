@@ -64,8 +64,11 @@ public class MovieEntity {
     @ManyToOne(cascade = {
         CascadeType.PERSIST,
         CascadeType.MERGE,})//Por defecto la carga es Eager, no hace falta colocarla al no ser tantos generos lo que existen.
-    @JoinColumn(name = "movie_genres")//La tabla movie va a tener una FK "genre_id:" por eso en está relación es la dueña.
+    @JoinColumn(name = "genreId", insertable= false, updatable=false)//La tabla movie va a tener una FK "genre_id:" por eso en está relación es la dueña.
     private GenreEntity movieGenres;
+    
+    @Column(name="genreId", nullable=false)
+    private Long genreId;
 
 }
 
