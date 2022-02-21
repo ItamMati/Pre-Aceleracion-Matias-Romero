@@ -3,33 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.preAceleracionAlkemy.preAceleracion.Mapper;
+package com.preAceleracionAlkemy.preAceleracion.mapper;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
-import java.time.LocalDate;
+import java.util.List;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {GenreMapper.class})
 public interface MovieMapper {
 
     @Mappings({
-        @Mapping(source = "imagen", target = "imagen"),
-        @Mapping(source = "titulo", target = "titulo"),
-        @Mapping(source = "fechaDeCreacion", target = "fechaDeCreacion"),
-        @Mapping(source = "calificacion", target = "calificacion")
+        @Mapping(source = "image", target = "image"),
+        @Mapping(source = "title", target = "title"),
+        @Mapping(source = "dateOfCreation", target = "dateOfCreation"),
+        @Mapping(source = "calification", target = "calification"),
+        @Mapping(source = "movieGenres", target = "movieGenres")
 
     })
     MovieEntity movieDtoToEntity(MovieDto movieDto);
 
-    @Mappings({
-        @Mapping(source = "imagen", target = "imagen"),
-        @Mapping(source = "titulo", target = "titulo"),
-        @Mapping(source = "fechaDeCreacion", target = "fechaDeCreacion"),
-        @Mapping(source = "calificacion", target = "calificacion")})
+    @InheritInverseConfiguration
     MovieDto movieEntityToMovieDto(MovieEntity movie);
+
+    List<MovieEntity> listMovieDtoToListMovieEntity(List<MovieDto> movieDto);
+
+    @InheritInverseConfiguration
+    List<MovieDto> listMovieEntityToListMovieDto(List<MovieEntity> movie);
 
 }

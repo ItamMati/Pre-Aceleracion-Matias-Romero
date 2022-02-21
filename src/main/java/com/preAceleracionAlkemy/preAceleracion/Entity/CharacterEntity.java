@@ -23,23 +23,22 @@ import lombok.Setter;
 public class CharacterEntity {
     
     @Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
-	
-	private String imageUrl;
-	
-	private String name;
-	
-	private int age;
-	
-	private double weight;
-	
-	private String history;
-	
-	
-	//OneToMany: Peliculas
-	@ManyToMany(mappedBy = "movieCharacters", cascade = CascadeType.ALL)//Por default es LAZY
-	private Set<MovieEntity> characterMovies = new HashSet();;
-        
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    private String imageUrl;
+
+    private String name;
+
+    private int age;
+
+    private double weight;
+
+    private String history;
+
+    //OneToMany: Peliculas
+    @ManyToMany(mappedBy = "movieCharacters", cascade = CascadeType.ALL)//Por default es LAZY
+    private Set<MovieEntity> characterMovies = new HashSet();
+     
        
 }

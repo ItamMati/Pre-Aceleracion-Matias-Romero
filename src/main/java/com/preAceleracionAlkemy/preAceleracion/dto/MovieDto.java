@@ -11,11 +11,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class MovieDto {
 
     private Long id;
-    private String imagen;
-    private String titulo;
+    private String image;
+    private String title;
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private LocalDate fechaDeCreacion;
-    private String calificacion; //1 a 5
-  
+    private LocalDate dateOfCreation;
+
+    private String calification; //1 a 5
+
+    private GenreDto movieGenres;
 
 }
