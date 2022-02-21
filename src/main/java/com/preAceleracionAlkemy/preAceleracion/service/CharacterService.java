@@ -7,16 +7,18 @@ import java.util.Set;
 
 public interface CharacterService {
 
+//    List<CharacterDto> getCharacterList();
+    
     List<CharacterDto> getCharacterList();
 
-    CharacterDto getCharacterDetails(Long id);
+    CharacterDetailsDto getCharacterDetails(Long id);
     
-    CharacterDto saveNewCharacter(CharacterDto characterDto);
+    CharacterDetailsDto save(CharacterDetailsDto characterDetailsDto);
     
     void deleteCharacterById(Long id);
     
     CharacterDetailsDto editCharacterById(Long id, CharacterDetailsDto charToEdit);
    
-//    List<CharacterDto> getByFilters(String name, Integer age, Set<Long> movies);
+    List<CharacterDto> getByFilters(String name, Integer age, Double weight , Set<Long> idMovie);
 
 }

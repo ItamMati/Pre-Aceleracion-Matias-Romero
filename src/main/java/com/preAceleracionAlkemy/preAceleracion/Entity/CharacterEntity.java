@@ -32,7 +32,7 @@ public class CharacterEntity {
 
     private int age;
 
-    private double weight;
+    private Double weight;
 
     private String history;
 

@@ -47,5 +47,10 @@ public interface CharacterMapper {
 
     @InheritInverseConfiguration
     CharacterDetailsDto characterEntityToCharacterDetailsDto(CharacterEntity characterEntity);
+    
+     List<CharacterEntity> listCharacterDetailsDtoToListCharacterEntity(List<CharacterDetailsDto> characterDto);
 
-};
+    @InheritInverseConfiguration
+    List<CharacterDetailsDto> listCharacterEntityToListCharacterDetailsDto(List<CharacterEntity> character);
+
+}
