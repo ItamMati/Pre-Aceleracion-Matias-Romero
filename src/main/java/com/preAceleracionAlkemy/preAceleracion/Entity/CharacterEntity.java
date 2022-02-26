@@ -45,8 +45,8 @@ public class CharacterEntity {
     private boolean deleted = Boolean.FALSE; //atributo que se agrega para trabajar con el softDelete
 
     //OneToMany: Peliculas
-    @ManyToMany(mappedBy = "movieCharacters", cascade = CascadeType.ALL)//Por default es LAZY
     @JsonIgnore
+    @ManyToMany(mappedBy = "movieCharacters", cascade = CascadeType.PERSIST)//Por default es LAZY
     private Set<MovieEntity> characterMovies = new HashSet();
     
   

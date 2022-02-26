@@ -1,4 +1,4 @@
-package com.preAceleracionAlkemy.preAceleracion.service.serviceImplements;
+package com.preAceleracionAlkemy.preAceleracion.service.Impl;
 
 import com.preAceleracionAlkemy.preAceleracion.entity.GenreEntity;
 import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;

@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.preAceleracionAlkemy.preAceleracion.service.serviceImplements;
+package com.preAceleracionAlkemy.preAceleracion.service.Impl;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDtoResponse;
-import com.preAceleracionAlkemy.preAceleracion.mapper.GenreMapper;
 import com.preAceleracionAlkemy.preAceleracion.mapper.MovieMapper;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
 import com.preAceleracionAlkemy.preAceleracion.dto.MovieFilterDto;
-import com.preAceleracionAlkemy.preAceleracion.entity.GenreEntity;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;
 import com.preAceleracionAlkemy.preAceleracion.repository.MovieRepository;
@@ -24,7 +17,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.data.jpa.domain.Specification.where;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class MovieSeriviceImpl implements MovieService {
@@ -66,6 +58,8 @@ public class MovieSeriviceImpl implements MovieService {
     @Override
     public MovieDetailsDto editMovieById(Long id, MovieDetailsDto movieToEdit) {
         MovieEntity savedMovie = this.handleFindById(id);
+        
+     
         savedMovie.setImage(movieToEdit.getImage());
         savedMovie.setTitle(movieToEdit.getTitle());
         savedMovie.setCalification(movieToEdit.getCalification());

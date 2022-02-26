@@ -5,11 +5,8 @@
  */
 package com.preAceleracionAlkemy.preAceleracion.dto;
 
-import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
-import java.util.HashSet;
+
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +28,6 @@ public class CharacterDetailsDtoResponse {
     private String history;
 
    
-    private Set<MovieEntity> characterMovies;
+    private Set<MovieDetailsDto> characterMovies;
     
 }

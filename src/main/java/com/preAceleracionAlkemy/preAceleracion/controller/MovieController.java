@@ -40,13 +40,13 @@ public class MovieController {
 
     }
 
-    @GetMapping("/details/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<MovieDetailsDtoResponse> getMovieDetailsDtoById(@PathVariable Long id) {
         MovieDetailsDtoResponse movieDetailsResponse = movieService.getMovieDetails(id);
         return ResponseEntity.status(HttpStatus.OK).body(movieDetailsResponse);
     }
 
-    @PostMapping("/save")
+    @PostMapping()
     public ResponseEntity<MovieDetailsDto> save(@RequestBody MovieDetailsDto movie) {
 
         MovieDetailsDto newMovie = movieService.save(movie);
@@ -64,7 +64,7 @@ public class MovieController {
     }
 
     // == DELETE ==	
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         movieService.deleteMovieById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

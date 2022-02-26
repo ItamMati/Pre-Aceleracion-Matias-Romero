@@ -38,7 +38,7 @@ public class CharacterController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(characterDto);
     }
 
-    @GetMapping("/details/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<CharacterDetailsDtoResponse> getCharacterDetailsDtoById(@PathVariable Long id) {
         CharacterDetailsDtoResponse characterDetails = characterService.getCharacterDetails(id);
         return ResponseEntity.status(HttpStatus.OK).body(characterDetails);
@@ -59,7 +59,7 @@ public class CharacterController {
     }
 
     // == DELETE ==	
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         characterService.deleteCharacterById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

@@ -1,6 +1,7 @@
 package com.preAceleracionAlkemy.preAceleracion.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -55,7 +56,7 @@ public class MovieEntity {
     //                                      Y sino existe, los crea y entiendo que devuelve.  
     )// Carga perezosa, la carga solo cuando es requerida/Por default un ManyToMany es LAZY, no haria falta en este caso
 
-//      Personaliza la creacion de la tabla intermedia.
+    //Personaliza la creacion de la tabla intermedia.
     @JoinTable(
             name = "movies_characters",// Define el nombre de la tabla
             joinColumns = @JoinColumn(name = "id_movie"),// El id que relaciona a entidad en la que estamos con la tabla
