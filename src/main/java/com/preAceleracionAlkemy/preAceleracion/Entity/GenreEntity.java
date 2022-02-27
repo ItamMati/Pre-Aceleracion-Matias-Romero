@@ -24,9 +24,9 @@ public class GenreEntity {
     private String name;
 
     private String imageUrl;
-
+//
     @OneToMany(mappedBy = "movieGenres")
-    @JsonIgnore
+//    @JsonIgnore
     private Set<MovieEntity> movies;
 
 }

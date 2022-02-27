@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,7 +28,7 @@ import org.hibernate.annotations.Where;
 @SQLDelete(sql = "UPDATE characters SET deleted = true WHERE id=?")// Se debe declarar para aplicar el SoftDelete
 @Where(clause = "deleted=false")// Esta etiqueta sirve para que no liste los objetos a los cuales se les aplico el softDelete
 public class CharacterEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -41,15 +42,29 @@ public class CharacterEntity {
     private Double weight;
 
     private String history;
-    
+
     private boolean deleted = Boolean.FALSE; //atributo que se agrega para trabajar con el softDelete
 
-    //OneToMany: Peliculas
-    @JsonIgnore
-    @ManyToMany(mappedBy = "movieCharacters", cascade = CascadeType.PERSIST)//Por default es LAZY
+ 
+//    @JsonIgnore
+    @ManyToMany(mappedBy = "movieCharacters")//Por default es LAZY
     private Set<MovieEntity> characterMovies = new HashSet();
-    
-  
-     
-       
+
+    @Override
+    public boolean equals(Object object) {
+
+        if (object == null) {
+            return false;
+        }
+
+        if (getClass() != object.getClass()) {
+            return false;
+        }
+
+        final CharacterEntity other = (CharacterEntity) object;
+
+        return Objects.equals(other.id, this.id);
+
+    }
+
 }

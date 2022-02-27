@@ -2,9 +2,11 @@ package com.preAceleracionAlkemy.preAceleracion.auth.config;
 
 import com.preAceleracionAlkemy.preAceleracion.auth.filter.JwtRequestFilter;
 import com.preAceleracionAlkemy.preAceleracion.auth.service.UserDetailsCustomService;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
+
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,20 +20,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsCustomService userDetailsCustomService;
-
+    
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Override
+    
+     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userDetailsCustomService).passwordEncoder(passwordEncoder());
 
+    }
+
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -41,10 +44,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+   
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.csrf().disable().authorizeHttpRequests()
+        httpSecurity.csrf().disable().
+                authorizeHttpRequests()
                 .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling()

@@ -5,8 +5,8 @@ import com.preAceleracionAlkemy.preAceleracion.auth.entity.UserEntity;
 import com.preAceleracionAlkemy.preAceleracion.auth.repository.UserRepository;
 import com.preAceleracionAlkemy.preAceleracion.service.EmailService;
 import java.util.Collections;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,17 +29,20 @@ public class UserDetailsCustomService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserEntity userEntity = userRepository.findByUsername(username);
+        Optional<UserEntity> userEntity = userRepository.findByUsername(username);
 
         if (userEntity == null) {
 
             throw new UsernameNotFoundException("username or password not fount");
         }
 
-        return new User(userEntity.getUsername(), userEntity.getPassword(), Collections.emptyList());
+        return new User(userEntity.get().getUsername(), userEntity.get().getPassword(), Collections.emptyList());
     }
 
     public boolean save(UserDto userDto) {
+        
+           Optional<UserEntity> matchingUser = userRepository.findByUsername(userDto.getUsername());
+        if (matchingUser.isPresent()) throw new IllegalArgumentException("El usuario ya existe");
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(userDto.getUsername());

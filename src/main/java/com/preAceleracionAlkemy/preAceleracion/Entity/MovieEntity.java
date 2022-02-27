@@ -36,7 +36,7 @@ public class MovieEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_movies")
-    private Long id;
+    Long id;
     private String image;
     private String title;
     @Column(name = "date_of_creation")
@@ -45,18 +45,14 @@ public class MovieEntity {
     private String calification; //1 a 5
 
     private boolean deleted = Boolean.FALSE; //atributo que se agrega para trabajar con el softDelete
-
-    @Column(name = "character_id")
+//
     @ManyToMany(// Una pelicula tiene muchos actores, y un actor está en muchas peliculas.
-            cascade = {
-                CascadeType.PERSIST,// Hace que la persitencia sea tanto de la duena como de las hijas.
-                //                                       Si persiste las peliculas, persiste a los personajes.
-                CascadeType.MERGE,}//Entiendo que actualiza los estados de los atributos de la tabla, en donde este se repite,
+            //Entiendo que actualiza los estados de los atributos de la tabla, en donde este se repite,
     //                                      y los devuelve siempre y cuando existan.  
     //                                      Y sino existe, los crea y entiendo que devuelve.  
     )// Carga perezosa, la carga solo cuando es requerida/Por default un ManyToMany es LAZY, no haria falta en este caso
 
-    //Personaliza la creacion de la tabla intermedia.
+//    Personaliza la creacion de la tabla intermedia.
     @JoinTable(
             name = "movies_characters",// Define el nombre de la tabla
             joinColumns = @JoinColumn(name = "id_movie"),// El id que relaciona a entidad en la que estamos con la tabla
@@ -64,14 +60,11 @@ public class MovieEntity {
     @JsonIgnore
     private Set<CharacterEntity> movieCharacters;// Este atributo es el que le indica con que tabla es la relacion.
 
-    @ManyToOne(cascade = {
-        CascadeType.PERSIST,
-        CascadeType.MERGE,})//Por defecto la carga es Eager, no hace falta colocarla al no ser tantos generos lo que existen.
+    @ManyToOne()//Por defecto la carga es Eager, no hace falta colocarla al no ser tantos generos lo que existen.
     @JoinColumn(name = "genreId", insertable = false, updatable = false)//La tabla movie va a tener una FK "genre_id:" por eso en está relación es la dueña.
 
     private GenreEntity movieGenres;
 
-    @Column(name = "genreId", nullable = false)
     private Long genreId;
 
     // :::: Methods ::::	
