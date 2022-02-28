@@ -27,12 +27,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtil;
 
-//    public JwtRequestFilter(@Lazy AuthenticationManager authenticationManager) {
-//        this.authenticationManager = authenticationManager;
-//    }
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
