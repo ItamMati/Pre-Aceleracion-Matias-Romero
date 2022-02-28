@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,9 +26,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private UserDetailsCustomService userDetailsCustomService;
     @Autowired
     private JwtUtils jwtUtil;
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
 
+//    public JwtRequestFilter(@Lazy AuthenticationManager authenticationManager) {
+//        this.authenticationManager = authenticationManager;
+//    }
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -51,13 +55,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
                 UsernamePasswordAuthenticationToken authReq
                         = new UsernamePasswordAuthenticationToken(
-                                userDetails.getUsername(),
-                                userDetails.getPassword());
-                
-                authReq.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                                userDetails, null, null);
 
+//                authReq.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 //                Authentication auth = authenticationManager.authenticate(authReq);
-
                 SecurityContextHolder.getContext().setAuthentication(authReq);
 
             }

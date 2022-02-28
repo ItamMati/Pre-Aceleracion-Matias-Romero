@@ -5,6 +5,7 @@ import com.preAceleracionAlkemy.preAceleracion.auth.service.UserDetailsCustomSer
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,8 +22,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsCustomService userDetailsCustomService;
     
-    @Autowired
+  
     private JwtRequestFilter jwtRequestFilter;
+    
+      @Autowired
+    public SecurityConfiguration(@Lazy JwtRequestFilter jwtRequestFilter) {
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
+ 
     
      @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
