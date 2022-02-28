@@ -27,7 +27,6 @@ public interface CharacterMapper {
         @Mapping(target = "id", source = "character.id"),
         @Mapping(target = "characterMovies",  ignore = true),
         @Mapping(target = "idMovie",  ignore = true)
-    
     })
     CharacterEntity toDto(CharacterEntity character, CharacterDtoDetails newCharacter);
 

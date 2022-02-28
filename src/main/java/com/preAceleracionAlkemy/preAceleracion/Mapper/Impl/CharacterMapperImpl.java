@@ -6,8 +6,9 @@ import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 import com.preAceleracionAlkemy.preAceleracion.entity.CharacterEntity;
 import com.preAceleracionAlkemy.preAceleracion.mapper.CharacterMapper;
 import java.util.List;
+import lombok.Generated;
 
-
+@Generated
 public class CharacterMapperImpl implements CharacterMapper {
 
     @Override
