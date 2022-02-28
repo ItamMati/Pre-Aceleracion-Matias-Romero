@@ -2,6 +2,7 @@ package com.preAceleracionAlkemy.preAceleracion.controller;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoEdit;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 import com.preAceleracionAlkemy.preAceleracion.service.CharacterService;
 import java.util.List;
@@ -53,8 +54,8 @@ public class CharacterController {
 
     // == PUT ==	
     @PutMapping("/{id}")
-    public ResponseEntity<CharacterDtoDetails> editCharacter(@PathVariable Long id, @RequestBody CharacterDtoDetails charToEdit) {
-        CharacterDtoDetails editedChar = characterService.editCharacterById(id, charToEdit);
+    public ResponseEntity<CharacterDtoEdit> editCharacter(@PathVariable Long id, @RequestBody CharacterDtoDetails charToEdit) {
+        CharacterDtoEdit editedChar = characterService.editCharacterById(id,charToEdit);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedChar);
     }
 

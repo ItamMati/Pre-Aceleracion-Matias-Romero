@@ -1,6 +1,7 @@
 package com.preAceleracionAlkemy.preAceleracion.service;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoEdit;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 import java.util.List;
@@ -17,7 +18,7 @@ public interface CharacterService {
 
     void deleteCharacterById(Long id);
 
-    CharacterDtoDetails editCharacterById(Long id, CharacterDtoDetails charToEdit);
+    CharacterDtoEdit editCharacterById(Long id, CharacterDtoDetails charToEdit);
 
     List<CharacterDtoList> getByFilters(String name, Integer age, Double weight, Set<Long> idMovie);
 

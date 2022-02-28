@@ -2,6 +2,7 @@ package com.preAceleracionAlkemy.preAceleracion.service.Impl;
 
 import com.preAceleracionAlkemy.preAceleracion.mapper.CharacterMapper;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoEdit;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.dto.CharacterDtoSpecification;
@@ -19,7 +20,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.data.jpa.domain.Specification.where;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
@@ -67,10 +67,8 @@ public class CharacterServiceImpl implements CharacterService {
     public CharacterDtoDetails save(CharacterDtoDetails characterDetailsDto) {
 
         CharacterEntity newCharacterEntity = characterMapper.characterDetailsDtoToEntity(characterDetailsDto);
-        
-        
 
-                movieService.handleFindById(characterDetailsDto.getIdMovie()).addCharacterToMovie(newCharacterEntity);
+        movieService.handleFindById(characterDetailsDto.getIdMovie()).addCharacterToMovie(newCharacterEntity);
 
         CharacterEntity savedEntity = characterRepository.save(newCharacterEntity);
 
@@ -84,31 +82,25 @@ public class CharacterServiceImpl implements CharacterService {
     public void deleteCharacterById(Long id) {
 
         CharacterEntity exist = handleFindById(id);
-        
-    
+
         characterRepository.deleteById(exist.getId());
     }
 
     // == PUT ==
     @Override
-    public CharacterDtoDetails editCharacterById(Long id, CharacterDtoDetails charToEdit) {
+    public CharacterDtoEdit editCharacterById(Long id, CharacterDtoDetails charToEdit) {
+
         CharacterEntity savedChar = this.handleFindById(id);
-        savedChar.setImageUrl(charToEdit.getImageUrl());
-        savedChar.setName(charToEdit.getName());
-        savedChar.setAge(charToEdit.getAge());
-        savedChar.setWeight(charToEdit.getWeight());
-        savedChar.setHistory(charToEdit.getHistory());
-        CharacterEntity editedChar = characterRepository.save(savedChar);
-        CharacterDtoDetails resultDTO = characterMapper.characterEntityToCharacterDetailsDto(editedChar);
-        return resultDTO;
+        CharacterDtoEdit editedChar = characterMapper.characterEntityToCharacterDtoEdit(characterRepository.save(characterMapper.toDto(savedChar, charToEdit)));
+
+        return editedChar;
     }
 
     // == ERROR HANDLING ==
     public CharacterEntity handleFindById(Long id) {
-        
+
         Optional<CharacterEntity> toBeFound = characterRepository.findById(id);
-        
-       
+
         if (!toBeFound.isPresent()) {
             throw new ParamNotFound("No Character for id: " + id);
         }
