@@ -27,7 +27,7 @@ public class MovieController {
     private MovieService movieService;
 
     //EndPoint GET//
-    @GetMapping("/list")
+    @GetMapping()
     public ResponseEntity<List<MovieDtoList>> findAll(@RequestParam(required = false) String title,
             @RequestParam(required = false) String genre,
             @RequestParam(required = false, defaultValue = "ASC") String order,

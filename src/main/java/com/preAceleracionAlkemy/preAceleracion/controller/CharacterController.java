@@ -28,7 +28,7 @@ public class CharacterController {
     private CharacterService characterService;
 
     // == GET ==		
-    @GetMapping("/list")
+    @GetMapping("")
     public ResponseEntity<List<CharacterDtoList>> getCharacters(@RequestParam(required = false) String name,
                                                             @RequestParam(required = false) Integer age,
                                                             @RequestParam(required = false) Double weight,
