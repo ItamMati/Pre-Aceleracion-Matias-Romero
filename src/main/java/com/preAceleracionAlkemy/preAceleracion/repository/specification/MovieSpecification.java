@@ -1,6 +1,6 @@
 package com.preAceleracionAlkemy.preAceleracion.repository.specification;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieFilterDto;
+import com.preAceleracionAlkemy.preAceleracion.repository.specification.dto.MovieDtoSpecification;
 import com.preAceleracionAlkemy.preAceleracion.entity.GenreEntity;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import javax.persistence.criteria.Join;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MovieSpecification {
 
-    public Specification<MovieEntity> getByTitle(MovieFilterDto movieFilterDto) {
+    public Specification<MovieEntity> getByTitle(MovieDtoSpecification movieFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 
@@ -26,7 +26,7 @@ public class MovieSpecification {
 
     }
 
-    public Specification<MovieEntity> getByGenre(MovieFilterDto movieFilterDto) {
+    public Specification<MovieEntity> getByGenre(MovieDtoSpecification movieFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 
@@ -44,7 +44,7 @@ public class MovieSpecification {
 
     }
 
-    public Specification<MovieEntity> getByDate(MovieFilterDto movieFilterDto) {
+    public Specification<MovieEntity> getByDate(MovieDtoSpecification movieFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 
@@ -60,7 +60,7 @@ public class MovieSpecification {
 
     }
 
-    public Specification<MovieEntity> getByOrder(MovieFilterDto movieFilterDto) {
+    public Specification<MovieEntity> getByOrder(MovieDtoSpecification movieFilterDto) {
 
         String orderByField = "dateOfCreation";
 

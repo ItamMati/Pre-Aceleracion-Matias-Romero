@@ -3,10 +3,9 @@ package com.preAceleracionAlkemy.preAceleracion.auth.controller;
 import com.preAceleracionAlkemy.preAceleracion.auth.dto.AuthenticationRequest;
 import com.preAceleracionAlkemy.preAceleracion.auth.dto.AuthenticationResponse;
 import com.preAceleracionAlkemy.preAceleracion.auth.dto.UserDto;
-;
-import com.preAceleracionAlkemy.preAceleracion.auth.service.JwtUtils;
 import com.preAceleracionAlkemy.preAceleracion.auth.service.LoginService;
 import com.preAceleracionAlkemy.preAceleracion.auth.service.UserDetailsCustomService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,7 @@ public class UserAuthController {
     private LoginService loginService;
 
     @PostMapping("/singup")
-    public ResponseEntity<AuthenticationResponse> singUp(@RequestBody UserDto user) throws Error {
+    public ResponseEntity<AuthenticationResponse> singUp(@Valid @RequestBody UserDto user) throws Error {
 
         this.userDetailsCustomService.save(user);
 
@@ -37,7 +36,7 @@ public class UserAuthController {
     }
 
     @PostMapping("/singin")
-    public ResponseEntity<AuthenticationResponse> singIn(@RequestBody AuthenticationRequest authRequest) throws Exception {
+    public ResponseEntity<AuthenticationResponse> singIn(@Valid @RequestBody AuthenticationRequest authRequest) throws Exception {
 
         String jwt = loginService.singIn(authRequest);
 

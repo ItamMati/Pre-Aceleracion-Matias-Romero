@@ -1,12 +1,11 @@
 package com.preAceleracionAlkemy.preAceleracion.controller;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDtoResponse;
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
-import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoDetails;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoList;
 import com.preAceleracionAlkemy.preAceleracion.service.MovieService;
 import java.util.Date;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,27 +28,27 @@ public class MovieController {
 
     //EndPoint GET//
     @GetMapping("/list")
-    public ResponseEntity<List<MovieDto>> findAll(@RequestParam(required = false) String title,
+    public ResponseEntity<List<MovieDtoList>> findAll(@RequestParam(required = false) String title,
             @RequestParam(required = false) String genre,
             @RequestParam(required = false, defaultValue = "ASC") String order,
             @RequestParam(required = false) Date date) {
 
-        List<MovieDto> movies = movieService.getByFilter(title, genre, order, date);
+        List<MovieDtoList> movies = movieService.getByFilter(title, genre, order, date);
 
         return ResponseEntity.ok(movies);
 
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<MovieDetailsDtoResponse> getMovieDetailsDtoById(@PathVariable Long id) {
-        MovieDetailsDtoResponse movieDetailsResponse = movieService.getMovieDetails(id);
+    public ResponseEntity<MovieDtoDetails> getMovieDetailsDtoById(@PathVariable Long id) {
+        MovieDtoDetails movieDetailsResponse = movieService.getMovieDetails(id);
         return ResponseEntity.status(HttpStatus.OK).body(movieDetailsResponse);
     }
 
     @PostMapping()
-    public ResponseEntity<MovieDetailsDto> save(@RequestBody MovieDetailsDto movie) {
+    public ResponseEntity<MovieDtoDetails> save(@Valid @RequestBody MovieDtoDetails movie) {
 
-        MovieDetailsDto newMovie = movieService.save(movie);
+        MovieDtoDetails newMovie = movieService.save(movie);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newMovie);
 //        continente guardado
@@ -58,8 +57,8 @@ public class MovieController {
 
     // == PUT ==	
     @PutMapping("/{id}")
-    public ResponseEntity<MovieDetailsDto> editCharacter(@PathVariable Long id, @RequestBody MovieDetailsDto charToEdit) {
-        MovieDetailsDto editedChar = movieService.editMovieById(id, charToEdit);
+    public ResponseEntity<MovieDtoDetails> editCharacter(@PathVariable Long id,@Valid @RequestBody MovieDtoDetails charToEdit) {
+        MovieDtoDetails editedChar = movieService.editMovieById(id, charToEdit);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedChar);
     }
 

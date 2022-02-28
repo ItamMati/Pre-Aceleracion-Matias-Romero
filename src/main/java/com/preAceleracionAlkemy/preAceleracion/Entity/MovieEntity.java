@@ -24,7 +24,6 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
-//////////CHALLENGE A ENTREGAR 
 @Getter
 @Setter
 @Entity
@@ -46,23 +45,22 @@ public class MovieEntity {
 
     private boolean deleted = Boolean.FALSE; //atributo que se agrega para trabajar con el softDelete
 //
+
     @ManyToMany(// Una pelicula tiene muchos actores, y un actor está en muchas peliculas.
             //Entiendo que actualiza los estados de los atributos de la tabla, en donde este se repite,
-    //                                      y los devuelve siempre y cuando existan.  
-    //                                      Y sino existe, los crea y entiendo que devuelve.  
-    )// Carga perezosa, la carga solo cuando es requerida/Por default un ManyToMany es LAZY, no haria falta en este caso
+            //                                      y los devuelve siempre y cuando existan.  
+            //                                      Y sino existe, los crea y entiendo que devuelve.  
+            )// Carga perezosa, la carga solo cuando es requerida/Por default un ManyToMany es LAZY, no haria falta en este caso
 
 //    Personaliza la creacion de la tabla intermedia.
     @JoinTable(
             name = "movies_characters",// Define el nombre de la tabla
             joinColumns = @JoinColumn(name = "id_movie"),// El id que relaciona a entidad en la que estamos con la tabla
             inverseJoinColumns = @JoinColumn(name = "id_character"))//El id que relaciona a la otra entidad con la tabla
-    @JsonIgnore
     private Set<CharacterEntity> movieCharacters;// Este atributo es el que le indica con que tabla es la relacion.
 
     @ManyToOne()//Por defecto la carga es Eager, no hace falta colocarla al no ser tantos generos lo que existen.
     @JoinColumn(name = "genreId", insertable = false, updatable = false)//La tabla movie va a tener una FK "genre_id:" por eso en está relación es la dueña.
-
     private GenreEntity movieGenres;
 
     private Long genreId;

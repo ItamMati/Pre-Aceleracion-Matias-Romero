@@ -1,4 +1,4 @@
-package com.preAceleracionAlkemy.preAceleracion.dto;
+package com.preAceleracionAlkemy.preAceleracion.dto.response;
 
 import lombok.*;
 

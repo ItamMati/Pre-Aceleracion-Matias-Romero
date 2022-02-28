@@ -1,4 +1,4 @@
-package com.preAceleracionAlkemy.preAceleracion.dto;
+package com.preAceleracionAlkemy.preAceleracion.repository.specification.dto;
 
 import java.util.Date;
 import lombok.Getter;
@@ -7,17 +7,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Setter
 @Getter
-public class MovieFilterDto {
+public class MovieDtoSpecification {
 
     private String title;
     private String genre;
     private String order;
     private Date fechaDeCreacion;
 
-    public MovieFilterDto() {
+    public MovieDtoSpecification() {
     }
 
-    public MovieFilterDto(String title, String genre, String order, Date fechaDeCreacion) {
+    public MovieDtoSpecification(String title, String genre, String order, Date fechaDeCreacion) {
         this.title = title;
         this.genre = genre;
         this.order = order;

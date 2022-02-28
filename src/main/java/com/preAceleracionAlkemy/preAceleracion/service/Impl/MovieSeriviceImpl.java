@@ -1,15 +1,13 @@
 package com.preAceleracionAlkemy.preAceleracion.service.Impl;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDtoResponse;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoDetails;
 import com.preAceleracionAlkemy.preAceleracion.mapper.MovieMapper;
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieFilterDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoList;
+import com.preAceleracionAlkemy.preAceleracion.repository.specification.dto.MovieDtoSpecification;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;
 import com.preAceleracionAlkemy.preAceleracion.repository.MovieRepository;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.MovieSpecification;
-import com.preAceleracionAlkemy.preAceleracion.service.GenreService;
 import com.preAceleracionAlkemy.preAceleracion.service.MovieService;
 import java.util.Date;
 import java.util.List;
@@ -25,18 +23,15 @@ public class MovieSeriviceImpl implements MovieService {
     private MovieMapper movieMapper;
 
     @Autowired
-    private GenreService genreService;
-
-    @Autowired
     private MovieRepository movieRepository;
 
     @Autowired
     private MovieSpecification movieSpecification;
 
     @Override
-    public List<MovieDto> getByFilter(String name, String genre, String order, Date date) {
+    public List<MovieDtoList> getByFilter(String name, String genre, String order, Date date) {
 
-        MovieFilterDto filterDto = new MovieFilterDto(name, genre, order, date);
+        MovieDtoSpecification filterDto = new MovieDtoSpecification(name, genre, order, date);
 
         List<MovieEntity> entity = movieRepository.findAll(
                 where((movieSpecification.getByTitle(filterDto)).
@@ -48,39 +43,34 @@ public class MovieSeriviceImpl implements MovieService {
     }
 
     @Override
-    public MovieDetailsDtoResponse getMovieDetails(Long id) {
+    public MovieDtoDetails getMovieDetails(Long id) {
         MovieEntity dbMovie = this.handleFindById(id);
-        MovieDetailsDtoResponse resultDTO = movieMapper.movieEntityToMovieDetailsDtoResponse(dbMovie);
+        MovieDtoDetails resultDTO = movieMapper.movieEntityToMovieDetailsDto(dbMovie);
         return resultDTO;
     }
 
     // == PUT ==
     @Override
-    public MovieDetailsDto editMovieById(Long id, MovieDetailsDto movieToEdit) {
+    public MovieDtoDetails editMovieById(Long id, MovieDtoDetails movieToEdit) {
         MovieEntity savedMovie = this.handleFindById(id);
-        
-     
+
         savedMovie.setImage(movieToEdit.getImage());
         savedMovie.setTitle(movieToEdit.getTitle());
         savedMovie.setCalification(movieToEdit.getCalification());
         savedMovie.setDateOfCreation(movieToEdit.getDateOfCreation());
         MovieEntity editedMovie = movieRepository.save(savedMovie);
-        MovieDetailsDto resultDTO = movieMapper.movieEntityToMovieDetailsDto(editedMovie);
+        MovieDtoDetails resultDTO = movieMapper.movieEntityToMovieDetailsDto(editedMovie);
         return resultDTO;
     }
 
     @Override
-    public MovieDetailsDto save(MovieDetailsDto movieDto) {
+    public MovieDtoDetails save(MovieDtoDetails movieDto) {
 
         MovieEntity newMovie = movieMapper.movieDetailsDtoToEntity(movieDto);
 
-//        GenreEntity genre = genreService.handleFindById(movieDto.getGenreId());
-//
-//        newMovie.setMovieGenres((genre));
-
         MovieEntity entitySaved = movieRepository.save(newMovie);
 
-        MovieDetailsDto response = movieMapper.movieEntityToMovieDetailsDto(entitySaved);
+        MovieDtoDetails response = movieMapper.movieEntityToMovieDetailsDto(entitySaved);
 
         return response;
 
@@ -94,6 +84,7 @@ public class MovieSeriviceImpl implements MovieService {
     }
 
     // == ERROR HANDLING ==
+    @Override
     public MovieEntity handleFindById(Long id) {
         Optional<MovieEntity> toBeFound = movieRepository.findById(id);
         if (!toBeFound.isPresent()) {

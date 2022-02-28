@@ -10,7 +10,7 @@ public class UserDto {
     @Email(message = "Username must be an email")
     private String username;
     
-    @Size(min =8)
+    @Size(min =8,message = "The password must contain at least 8 characters")
     private String password;
     
 }

@@ -1,50 +1,32 @@
 package com.preAceleracionAlkemy.preAceleracion.mapper;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDto;
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieDetailsDtoResponse;
-import com.preAceleracionAlkemy.preAceleracion.dto.MovieDto;
-import com.preAceleracionAlkemy.preAceleracion.entity.GenreEntity;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoDetails;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoList;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import java.util.List;
 import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring", uses = {MovieMapper.class})
+@Mapper(componentModel = "spring", uses = {CharacterMapper.class})
 public interface MovieMapper {
 
     @Mappings({
         @Mapping(source = "image", target = "image"),
         @Mapping(source = "title", target = "title"),
         @Mapping(source = "dateOfCreation", target = "dateOfCreation"),})
-    MovieEntity movieDtoToEntity(MovieDto movieDto);
+//    MovieEntity movieDtoToEntity(MovieDtoList movieDto);
+//
+//    @InheritInverseConfiguration
+//    MovieDtoList movieEntityToMovieDto(MovieEntity movie);
+
+    List<MovieEntity> listMovieDtoToListMovieEntity(List<MovieDtoList> movieDto);
 
     @InheritInverseConfiguration
-    MovieDto movieEntityToMovieDto(MovieEntity movie);
-
-    List<MovieEntity> listMovieDtoToListMovieEntity(List<MovieDto> movieDto);
-
-    @InheritInverseConfiguration
-    List<MovieDto> listMovieEntityToListMovieDto(List<MovieEntity> movie);
-
-    @Mappings({
-        @Mapping(source = "image", target = "image"),
-        @Mapping(source = "title", target = "title"),
-        @Mapping(source = "dateOfCreation", target = "dateOfCreation"),
-        @Mapping(source = "calification", target = "calification"),
-        @Mapping(source = "genreId", target = "genreId")
-
-    })
-    MovieEntity movieDetailsDtoToEntity(MovieDetailsDto movieDetailsDto);
-
-    @InheritInverseConfiguration
-    MovieDetailsDto movieEntityToMovieDetailsDto(MovieEntity movie);
-
-    List<MovieEntity> listMovieDetailsDtoToListMovieEntity(List<MovieDetailsDto> movieDetailsDto);
-
-    @InheritInverseConfiguration
-    List<MovieDetailsDto> listMovieEntityToListMovieDetailsDto(List<MovieEntity> movie);
+    List<MovieDtoList> listMovieEntityToListMovieDto(List<MovieEntity> movie);
 
     @Mappings({
         @Mapping(source = "image", target = "image"),
@@ -54,11 +36,28 @@ public interface MovieMapper {
         @Mapping(source = "movieCharacters", target = "movieCharacters")
 
     })
+ 
+    MovieEntity movieDetailsDtoToEntity(MovieDtoDetails movieDetailsDto);
 
-    MovieDetailsDtoResponse movieEntityToMovieDetailsDtoResponse(MovieEntity movie);
+    @InheritInverseConfiguration
+    MovieDtoDetails movieEntityToMovieDetailsDto(MovieEntity movie);
 
+//    List<MovieEntity> listMovieDetailsDtoToListMovieEntity(List<MovieDtoDetails> movieDetailsDto);
+//
+//    @InheritInverseConfiguration
+//    List<MovieDtoDetails> listMovieEntityToListMovieDetailsDto(List<MovieEntity> movie);
+//    @Mappings({
+//        @Mapping(source = "image", target = "image"),
+//        @Mapping(source = "title", target = "title"),
+//        @Mapping(source = "dateOfCreation", target = "dateOfCreation"),
+//        @Mapping(source = "calification", target = "calification"),
+//        @Mapping(source = "movieCharacters", target = "movieCharacters")
+//
+//    })
+//
+//    MovieDtoDetails movieEntityToMovieDetailsDtoResponse(MovieEntity movie);
 //    @InheritInverseConfiguration      
-//    MovieEntity movieDetailsDtoResponseToEntity(MovieDetailsDtoResponse movieDetailsDto);
+//    MovieEntity movieDetailsDtoResponseToEntity(MovieDtoDetails movieDetailsDto);
 //    List<MovieEntity> listMovieDetailsDtoResponseToListMovieEntity(List<MovieDetailsDtoResponse> movieDetailsDtoResponse);
 //    @InheritInverseConfiguration
 //    List<MovieDetailsDtoResponse> listMovieEntityToListMovieDetailsDtoResponse(List<MovieEntity> movie);

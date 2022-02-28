@@ -1,6 +1,6 @@
 package com.preAceleracionAlkemy.preAceleracion.controller;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.ApiErrorDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.ApiErrorDto;
 import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;
 import java.util.ArrayList;
 import java.util.Arrays;

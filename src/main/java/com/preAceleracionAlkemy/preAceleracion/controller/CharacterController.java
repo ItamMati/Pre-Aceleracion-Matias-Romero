@@ -1,8 +1,8 @@
 package com.preAceleracionAlkemy.preAceleracion.controller;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDetailsDto;
-import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDetailsDtoResponse;
-import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 import com.preAceleracionAlkemy.preAceleracion.service.CharacterService;
 import java.util.List;
 import java.util.Set;
@@ -28,33 +28,33 @@ public class CharacterController {
 
     // == GET ==		
     @GetMapping("/list")
-    public ResponseEntity<List<CharacterDto>> getCharacters(@RequestParam(required = false) String name,
+    public ResponseEntity<List<CharacterDtoList>> getCharacters(@RequestParam(required = false) String name,
                                                             @RequestParam(required = false) Integer age,
                                                             @RequestParam(required = false) Double weight,
                                                             @RequestParam(required = false) Set<Long> idMovie) {
 
-        List<CharacterDto> characterDto = characterService.getByFilters(name, age, weight, idMovie);
+        List<CharacterDtoList> characterDto = characterService.getByFilters(name, age, weight, idMovie);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(characterDto);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CharacterDetailsDtoResponse> getCharacterDetailsDtoById(@PathVariable Long id) {
-        CharacterDetailsDtoResponse characterDetails = characterService.getCharacterDetails(id);
+    public ResponseEntity<CharacterDtoDetails> getCharacterDetailsDtoById(@PathVariable Long id) {
+        CharacterDtoDetails characterDetails = characterService.getCharacterDetails(id);
         return ResponseEntity.status(HttpStatus.OK).body(characterDetails);
     }
 
     // == POST ==	
     @PostMapping()
-    public ResponseEntity<CharacterDetailsDto> save(@RequestBody CharacterDetailsDto newCharacter) {
-        CharacterDetailsDto createdChar = characterService.save(newCharacter);
+    public ResponseEntity<CharacterDtoDetails> save(@RequestBody CharacterDtoDetails newCharacter) {
+        CharacterDtoDetails createdChar = characterService.save(newCharacter);
         return ResponseEntity.status(HttpStatus.OK).body(createdChar);
     }
 
     // == PUT ==	
     @PutMapping("/{id}")
-    public ResponseEntity<CharacterDetailsDto> editCharacter(@PathVariable Long id, @RequestBody CharacterDetailsDto charToEdit) {
-        CharacterDetailsDto editedChar = characterService.editCharacterById(id, charToEdit);
+    public ResponseEntity<CharacterDtoDetails> editCharacter(@PathVariable Long id, @RequestBody CharacterDtoDetails charToEdit) {
+        CharacterDtoDetails editedChar = characterService.editCharacterById(id, charToEdit);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedChar);
     }
 

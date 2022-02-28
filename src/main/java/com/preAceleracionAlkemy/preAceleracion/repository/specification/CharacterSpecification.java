@@ -1,6 +1,6 @@
 package com.preAceleracionAlkemy.preAceleracion.repository.specification;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.CharacterFilterDto;
+import com.preAceleracionAlkemy.preAceleracion.repository.specification.dto.CharacterDtoSpecification;
 import com.preAceleracionAlkemy.preAceleracion.entity.CharacterEntity;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import javax.persistence.criteria.Expression;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CharacterSpecification {
 
-    public Specification<CharacterEntity> getByName(CharacterFilterDto characterFilterDto) {
+    public Specification<CharacterEntity> getByName(CharacterDtoSpecification characterFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 
@@ -28,7 +28,7 @@ public class CharacterSpecification {
 
     }
 
-    public Specification<CharacterEntity> getByAge(CharacterFilterDto characterFilterDto) {
+    public Specification<CharacterEntity> getByAge(CharacterDtoSpecification characterFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 
@@ -43,7 +43,7 @@ public class CharacterSpecification {
 
     }
 
-    public Specification<CharacterEntity> getByWeight(CharacterFilterDto characterFilterDto) {
+    public Specification<CharacterEntity> getByWeight(CharacterDtoSpecification characterFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 
@@ -59,7 +59,7 @@ public class CharacterSpecification {
 
     }
 
-    public Specification<CharacterEntity> getByMovieId(CharacterFilterDto characterFilterDto) {
+    public Specification<CharacterEntity> getByMovieId(CharacterDtoSpecification characterFilterDto) {
 
         return (root, query, criteriaBuilder) -> {
 

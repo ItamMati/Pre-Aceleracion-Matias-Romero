@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.preAceleracionAlkemy.preAceleracion.dto;
+package com.preAceleracionAlkemy.preAceleracion.dto.response;
 
 import java.util.List;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
 package com.preAceleracionAlkemy.preAceleracion.service;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDetailsDto;
-import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDetailsDtoResponse;
-import com.preAceleracionAlkemy.preAceleracion.dto.CharacterDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
+
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 import java.util.List;
 import java.util.Set;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,17 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface CharacterService {
 
 //    List<CharacterDto> getCharacterList();
-    
 //    List<CharacterDto> getCharacterList();
+    CharacterDtoDetails getCharacterDetails(Long id);
 
-    CharacterDetailsDtoResponse getCharacterDetails(Long id);
-    
-    CharacterDetailsDto save(CharacterDetailsDto characterDetailsDto);
-    
+    CharacterDtoDetails save(CharacterDtoDetails characterDetailsDto);
+
     void deleteCharacterById(Long id);
-    
-    CharacterDetailsDto editCharacterById(Long id, CharacterDetailsDto charToEdit);
-   
-    List<CharacterDto> getByFilters(String name, Integer age, Double weight , Set<Long> idMovie);
+
+    CharacterDtoDetails editCharacterById(Long id, CharacterDtoDetails charToEdit);
+
+    List<CharacterDtoList> getByFilters(String name, Integer age, Double weight, Set<Long> idMovie);
 
 }

@@ -1,7 +1,7 @@
 
 package com.preAceleracionAlkemy.preAceleracion.mapper;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.GenreDto;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.GenreDto;
 import com.preAceleracionAlkemy.preAceleracion.entity.GenreEntity;
 import java.util.Optional;
 import org.mapstruct.InheritInverseConfiguration;
