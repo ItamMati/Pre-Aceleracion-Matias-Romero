@@ -1,9 +1,10 @@
 package com.preAceleracionAlkemy.preAceleracion.controller;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
+import com.preAceleracionAlkemy.preAceleracion.dto.request.CharacterDtoReq;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoEdit;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoRes;
 import com.preAceleracionAlkemy.preAceleracion.service.CharacterService;
 import java.util.List;
 import java.util.Set;
@@ -30,9 +31,9 @@ public class CharacterController {
     // == GET ==		
     @GetMapping("")
     public ResponseEntity<List<CharacterDtoList>> getCharacters(@RequestParam(required = false) String name,
-                                                            @RequestParam(required = false) Integer age,
-                                                            @RequestParam(required = false) Double weight,
-                                                            @RequestParam(required = false) Set<Long> idMovie) {
+            @RequestParam(required = false) Integer age,
+            @RequestParam(required = false) Double weight,
+            @RequestParam(required = false) Set<Long> idMovie) {
 
         List<CharacterDtoList> characterDto = characterService.getByFilters(name, age, weight, idMovie);
 
@@ -47,15 +48,15 @@ public class CharacterController {
 
     // == POST ==	
     @PostMapping()
-    public ResponseEntity<CharacterDtoDetails> save(@RequestBody CharacterDtoDetails newCharacter) {
-        CharacterDtoDetails createdChar = characterService.save(newCharacter);
+    public ResponseEntity<CharacterDtoRes> save(@RequestBody CharacterDtoReq newCharacter) {
+        CharacterDtoRes createdChar = characterService.save(newCharacter);
         return ResponseEntity.status(HttpStatus.OK).body(createdChar);
     }
 
     // == PUT ==	
     @PutMapping("/{id}")
     public ResponseEntity<CharacterDtoEdit> editCharacter(@PathVariable Long id, @RequestBody CharacterDtoDetails charToEdit) {
-        CharacterDtoEdit editedChar = characterService.editCharacterById(id,charToEdit);
+        CharacterDtoEdit editedChar = characterService.editCharacterById(id, charToEdit);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedChar);
     }
 

@@ -1,9 +1,11 @@
 package com.preAceleracionAlkemy.preAceleracion.service;
 
+import com.preAceleracionAlkemy.preAceleracion.dto.request.CharacterDtoReq;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoDetails;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoEdit;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoRes;
 import java.util.List;
 import java.util.Set;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +16,7 @@ public interface CharacterService {
 //    List<CharacterDto> getCharacterList();
     CharacterDtoDetails getCharacterDetails(Long id);
 
-    CharacterDtoDetails save(CharacterDtoDetails characterDetailsDto);
+    CharacterDtoRes save(CharacterDtoReq characterDtoReq);
 
     void deleteCharacterById(Long id);
 

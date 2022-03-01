@@ -1,16 +1,16 @@
 package com.preAceleracionAlkemy.preAceleracion.service;
 
+import com.preAceleracionAlkemy.preAceleracion.dto.request.MovieGenreDtoReq;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoDetails;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoList;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieGenreDtoRes;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import java.util.Date;
 import java.util.List;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 
 public interface MovieService {
 
-    MovieDtoDetails save(MovieDtoDetails dto);
+    MovieGenreDtoRes save(MovieGenreDtoReq dto);
 
     List<MovieDtoList> getByFilter(String name, String genre, String order, Date date);
 
@@ -18,8 +18,8 @@ public interface MovieService {
 
     void deleteMovieById(Long id);
 
-    MovieDtoDetails editMovieById(Long id, MovieDtoDetails movieToEdit);
-    
-   MovieEntity handleFindById(Long id);
+    MovieGenreDtoRes editMovieById(Long id, MovieGenreDtoReq movieToEdit);
+
+    MovieEntity handleFindById(Long id);
 
 }

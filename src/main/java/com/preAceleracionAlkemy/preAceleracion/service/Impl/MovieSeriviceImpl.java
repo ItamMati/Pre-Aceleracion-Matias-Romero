@@ -1,11 +1,15 @@
 package com.preAceleracionAlkemy.preAceleracion.service.Impl;
 
+import com.preAceleracionAlkemy.preAceleracion.dto.request.MovieGenreDtoReq;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoDetails;
 import com.preAceleracionAlkemy.preAceleracion.mapper.MovieMapper;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoList;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieGenreDtoRes;
+import com.preAceleracionAlkemy.preAceleracion.entity.GenreEntity;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.dto.MovieDtoSpecification;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;
+import com.preAceleracionAlkemy.preAceleracion.repository.GenreRepository;
 import com.preAceleracionAlkemy.preAceleracion.repository.MovieRepository;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.MovieSpecification;
 import com.preAceleracionAlkemy.preAceleracion.service.MovieService;
@@ -18,6 +22,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MovieSeriviceImpl implements MovieService {
+    
+    @Autowired
+    private GenreRepository genreRepository;
 
     @Autowired
     private MovieMapper movieMapper;
@@ -51,26 +58,32 @@ public class MovieSeriviceImpl implements MovieService {
 
     // == PUT ==
     @Override
-    public MovieDtoDetails editMovieById(Long id, MovieDtoDetails movieToEdit) {
+    public MovieGenreDtoRes editMovieById(Long id, MovieGenreDtoReq movieToEdit) {
         MovieEntity savedMovie = this.handleFindById(id);
 
         savedMovie.setImage(movieToEdit.getImage());
         savedMovie.setTitle(movieToEdit.getTitle());
         savedMovie.setCalification(movieToEdit.getCalification());
         savedMovie.setDateOfCreation(movieToEdit.getDateOfCreation());
+        Optional<GenreEntity> genre = genreRepository.findById(movieToEdit.getGenreId());
+        savedMovie.setMovieGenres(genre.get());
         MovieEntity editedMovie = movieRepository.save(savedMovie);
-        MovieDtoDetails resultDTO = movieMapper.movieEntityToMovieDetailsDto(editedMovie);
+        MovieGenreDtoRes resultDTO = movieMapper.movieEntityToMovieDtoRes(editedMovie);
         return resultDTO;
     }
 
     @Override
-    public MovieDtoDetails save(MovieDtoDetails movieDto) {
+    public MovieGenreDtoRes save(MovieGenreDtoReq movieDto) {
 
-        MovieEntity newMovie = movieMapper.movieDetailsDtoToEntity(movieDto);
+        MovieEntity newMovie = movieMapper.movieDtoReqToEntity(movieDto);
+        
+        Optional<GenreEntity> genre = genreRepository.findById(movieDto.getGenreId());
+        
+        newMovie.setMovieGenres(genre.get());
 
         MovieEntity entitySaved = movieRepository.save(newMovie);
 
-        MovieDtoDetails response = movieMapper.movieEntityToMovieDetailsDto(entitySaved);
+        MovieGenreDtoRes response = movieMapper.movieEntityToMovieDtoRes(entitySaved);
 
         return response;
 

@@ -41,7 +41,7 @@ public class CharacterEntity {
 
     
     @ManyToMany(mappedBy = "movieCharacters")//Por default es LAZY
-    private Set<MovieEntity> characterMovies = new HashSet();
+    private Set<MovieEntity> movieCharacters = new HashSet();
     
     private Long idMovie;
 
