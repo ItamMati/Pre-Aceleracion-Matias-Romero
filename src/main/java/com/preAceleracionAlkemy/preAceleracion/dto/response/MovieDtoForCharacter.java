@@ -6,13 +6,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MovieDtoCharacter {
+public class MovieDtoForCharacter {
     
     private Long id;
+    
     private String image;
+    
     private String title;
+    
     private LocalDate dateOfCreation;
+    
     private String calification; //1 a 5
-
     
 }

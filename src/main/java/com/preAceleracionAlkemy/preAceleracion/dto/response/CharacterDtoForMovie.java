@@ -5,10 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CharacterDtoMovie {
-    
-    
-    private Long id;
+public class CharacterDtoForMovie {
 
     private String imageUrl;
 
@@ -19,8 +16,5 @@ public class CharacterDtoMovie {
     private Double weight;
 
     private String history;
-    
 
-    
-    
 }

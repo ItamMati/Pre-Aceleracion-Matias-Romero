@@ -27,6 +27,6 @@ public class MovieDtoDetails {
     @Max(5)
     private String calification; //1 a 5
 
-    private Set<CharacterDtoMovie> movieCharacters;
+    private Set<CharacterDtoForMovie> movieCharacters;
 
 }

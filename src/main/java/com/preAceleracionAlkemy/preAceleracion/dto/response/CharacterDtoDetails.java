@@ -4,11 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 import lombok.*;
 
-
 @Getter
 @Setter
 public class CharacterDtoDetails {
-    
 
     private Long id;
 
@@ -21,10 +19,9 @@ public class CharacterDtoDetails {
     private Double weight;
 
     private String history;
-    
-    private Set<MovieDtoCharacter> characterMovies = new HashSet();
-    
-    private Long idMovie;
-    
-    
+
+    private Set<MovieDtoForCharacter> movieCharacters = new HashSet();
+
+//    private Long idMovie;
+//    
 }

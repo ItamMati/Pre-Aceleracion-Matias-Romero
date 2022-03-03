@@ -41,29 +41,6 @@ public class CharacterServiceImpl implements CharacterService {
     @Autowired
     private CharacterSpecification characterSpecification;
 
-    // == FILTERS ==
-    @Override
-    public List<CharacterDtoList> getByFilters(String name, Integer age, Double weight, Set<Long> movies) {
-        CharacterDtoSpecification characterFilterDto = new CharacterDtoSpecification(name, age, weight, movies);
-
-        List<CharacterEntity> entityList = characterRepository.findAll(
-                where((characterSpecification.getByName(characterFilterDto)).
-                        and(characterSpecification.getByAge(characterFilterDto).
-                                and(characterSpecification.getByWeight(characterFilterDto).
-                                        and(characterSpecification.getByMovieId(characterFilterDto))))));
-
-//        List<CharacterDtoList> resultDTO = characterMapper.listCharacterEntityToListCharacterDto(entityList);
-//        return resultDTO;
-        return null;
-    }
-
-    @Override
-    public CharacterDtoDetails getCharacterDetails(Long id) {
-        CharacterEntity dbChar = this.handleFindById(id);
-//         CharacterDtoDetails characterDetailsDto = characterMapper.characterEntityToCharacterDetailsDto(dbChar);
-        return null;
-    }
-
     // == POST ==
     @Override
     public CharacterDtoRes save(CharacterDtoReq characterDtoReq) {
@@ -77,6 +54,29 @@ public class CharacterServiceImpl implements CharacterService {
         CharacterDtoRes savedChar = characterMapper.characterEntityToCharacterDtoRes(savedEntity);
 
         return savedChar;
+    }
+
+    // == FILTERS ==
+    @Override
+    public List<CharacterDtoList> getByFilters(String name, Integer age, Double weight, Set<Long> movies) {
+        CharacterDtoSpecification characterFilterDto = new CharacterDtoSpecification(name, age, weight, movies);
+
+        List<CharacterEntity> entityList = characterRepository.findAll(
+                where((characterSpecification.getByName(characterFilterDto)).
+                        and(characterSpecification.getByAge(characterFilterDto).
+                                and(characterSpecification.getByWeight(characterFilterDto).
+                                        and(characterSpecification.getByMovieId(characterFilterDto))))));
+
+        List<CharacterDtoList> resultDTO = characterMapper.characterEntityToCharacterDtoList(entityList);
+        
+        return resultDTO;
+    }
+
+    @Override
+    public CharacterDtoDetails getCharacterDetails(Long id) {
+        CharacterEntity dbChar = this.handleFindById(id);
+        CharacterDtoDetails characterDetailsDto = characterMapper.characterEntityToCharacterDtoDetails(dbChar);
+        return characterDetailsDto;
     }
 
     // == DELETE ==

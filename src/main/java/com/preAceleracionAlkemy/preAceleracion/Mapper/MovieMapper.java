@@ -15,38 +15,19 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring", uses = {CharacterMapper.class, GenreMapper.class})
 public interface MovieMapper {
 
-    @Mappings({
-        @Mapping(source = "image", target = "image"),
-        @Mapping(source = "title", target = "title"),
-        @Mapping(source = "dateOfCreation", target = "dateOfCreation"),})
+ 
 
     List<MovieEntity> listMovieDtoToListMovieEntity(List<MovieDtoList> movieDto);
 
     @InheritInverseConfiguration
     List<MovieDtoList> listMovieEntityToListMovieDto(List<MovieEntity> movie);
 
-    @Mappings({
-        @Mapping(source = "image", target = "image"),
-        @Mapping(source = "title", target = "title"),
-        @Mapping(source = "dateOfCreation", target = "dateOfCreation"),
-        @Mapping(source = "calification", target = "calification"),
-        @Mapping(source = "movieCharacters", target = "movieCharacters")
-
-    })
 
     MovieEntity movieDetailsDtoToEntity(MovieDtoDetails movieDetailsDto);
 
     @InheritInverseConfiguration
     MovieDtoDetails movieEntityToMovieDetailsDto(MovieEntity movie);
 
-    /////////////////////////////////MovieDtoReq and MovieDtoRes/////////////////////////
-    @Mappings({
-        @Mapping(source = "image", target = "image"),
-        @Mapping(source = "title", target = "title"),
-        @Mapping(source = "dateOfCreation", target = "dateOfCreation"),
-        @Mapping(source = "calification", target = "calification"),
-        @Mapping(source = "genreId", target = "genreId"),
-       })
 
     @Mapping(target = "movieGenres", ignore = true)
     MovieEntity movieDtoReqToEntity(MovieGenreDtoReq movieDtoSave);
@@ -55,11 +36,8 @@ public interface MovieMapper {
     @Mapping(source = "movieGenres", target = "movieGenres")
     MovieGenreDtoRes movieEntityToMovieDtoRes(MovieEntity movie);
     
-      //    /////////////////////////////////////EDIT///////////////////////////////////////////
-    @Mapping(source = "movieToEdit.image", target = "image")
-    @Mapping(source = "movieToEdit.title", target = "title")
-    @Mapping(source = "movieToEdit.dateOfCreation", target = "dateOfCreation")
-    @Mapping(source = "movieToEdit.calification", target = "calification")
+      ///////////////////////////////////////EDIT///////////////////////////////////////////
+  
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "movieGenres", ignore = true)
     MovieEntity movieDtoEditToMovieEntity(@MappingTarget MovieEntity movieEntity, MovieGenreDtoReq movieToEdit);
@@ -68,4 +46,5 @@ public interface MovieMapper {
      MovieGenreDtoRes movieEntityToMovieDtoEdit(MovieEntity movie);
 }
 
- /////////////////////////////////MovieDtoReq and MovieDtoRes/////////////////////////
+
+

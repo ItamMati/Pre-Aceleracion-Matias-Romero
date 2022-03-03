@@ -1,6 +1,5 @@
 package com.preAceleracionAlkemy.preAceleracion.entity;
 
-
 import java.time.LocalDate;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -44,10 +43,10 @@ public class MovieEntity {
 //
 
     @ManyToMany(cascade = CascadeType.ALL)// Una pelicula tiene muchos actores, y un actor está en muchas peliculas.
-            //Entiendo que actualiza los estados de los atributos de la tabla, en donde este se repite,
-            //                                      y los devuelve siempre y cuando existan.  
-            //                                      Y sino existe, los crea y entiendo que devuelve.  
-            // Carga perezosa, la carga solo cuando es requerida/Por default un ManyToMany es LAZY, no haria falta en este caso
+    //Entiendo que actualiza los estados de los atributos de la tabla, en donde este se repite,
+    //                                      y los devuelve siempre y cuando existan.  
+    //                                      Y sino existe, los crea y entiendo que devuelve.  
+    // Carga perezosa, la carga solo cuando es requerida/Por default un ManyToMany es LAZY, no haria falta en este caso
 
 //    Personaliza la creacion de la tabla intermedia.
     @JoinTable(

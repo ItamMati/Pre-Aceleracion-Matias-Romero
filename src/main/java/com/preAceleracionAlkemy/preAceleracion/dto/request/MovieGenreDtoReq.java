@@ -1,6 +1,6 @@
 package com.preAceleracionAlkemy.preAceleracion.dto.request;
 
-import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoMovie;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoForMovie;
 import java.time.LocalDate;
 import java.util.Set;
 import javax.validation.constraints.Max;
@@ -30,9 +30,9 @@ public class MovieGenreDtoReq {
     @Max(5)
     private String calification; //1 a 5
 
-//    private Set<CharacterDtoMovie> movieCharacters;
-    
     @NotNull
     private Long genreId;
+
+    private Set<CharacterDtoForMovie> characters;
 
 }

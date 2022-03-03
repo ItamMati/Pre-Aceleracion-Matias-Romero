@@ -16,9 +16,7 @@ public class CharacterDtoReq {
     private Double weight;
 
     private String history;
-    
-    private Long idMovie;
 
-  
+    private Long idMovie;
 
 }

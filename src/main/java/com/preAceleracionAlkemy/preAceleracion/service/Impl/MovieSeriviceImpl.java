@@ -1,6 +1,7 @@
 package com.preAceleracionAlkemy.preAceleracion.service.Impl;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.request.MovieGenreDtoReq;
+import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoForMovie;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoDetails;
 import com.preAceleracionAlkemy.preAceleracion.mapper.MovieMapper;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.MovieDtoList;
@@ -9,6 +10,7 @@ import com.preAceleracionAlkemy.preAceleracion.entity.GenreEntity;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.dto.MovieDtoSpecification;
 import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;
+import com.preAceleracionAlkemy.preAceleracion.mapper.CharacterMapper;
 import com.preAceleracionAlkemy.preAceleracion.repository.GenreRepository;
 import com.preAceleracionAlkemy.preAceleracion.repository.MovieRepository;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.MovieSpecification;
@@ -22,7 +24,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MovieSeriviceImpl implements MovieService {
-    
+
     @Autowired
     private GenreRepository genreRepository;
 
@@ -34,6 +36,28 @@ public class MovieSeriviceImpl implements MovieService {
 
     @Autowired
     private MovieSpecification movieSpecification;
+
+    @Autowired
+    private CharacterMapper characterMapper;
+
+    @Override
+    public MovieGenreDtoRes save(MovieGenreDtoReq movieDto) {
+
+        MovieEntity newMovie = movieMapper.movieDtoReqToEntity(movieDto);
+
+        Optional<GenreEntity> genre = genreRepository.findById(movieDto.getGenreId());
+
+        newMovie.setMovieGenres(genre.get());
+
+        newMovie.setMovieCharacters(characterMapper.characterDtoForMovieToEntityCharacter(movieDto.getCharacters()));
+
+        MovieEntity entitySaved = movieRepository.save(newMovie);
+
+        MovieGenreDtoRes response = movieMapper.movieEntityToMovieDtoRes(entitySaved);
+
+        return response;
+
+    }
 
     @Override
     public List<MovieDtoList> getByFilter(String name, String genre, String order, Date date) {
@@ -58,32 +82,13 @@ public class MovieSeriviceImpl implements MovieService {
 
     // == PUT ==
     @Override
-    public MovieGenreDtoRes editMovieById(Long id, MovieGenreDtoReq  movieToEdit) {
-        
-        MovieEntity movieEntity = this.handleFindById(id);
+    public MovieGenreDtoRes editMovieById(Long id, MovieGenreDtoReq movieToEdit) {
 
- 
+        MovieEntity movieEntity = this.handleFindById(id);
 
         MovieEntity editMovie = movieRepository.save(movieMapper.movieDtoEditToMovieEntity(movieEntity, movieToEdit));
 
         return movieMapper.movieEntityToMovieDtoEdit(editMovie);
-     
-    }
-
-    @Override
-    public MovieGenreDtoRes save(MovieGenreDtoReq movieDto) {
-
-        MovieEntity newMovie = movieMapper.movieDtoReqToEntity(movieDto);
-        
-        Optional<GenreEntity> genre = genreRepository.findById(movieDto.getGenreId());
-        
-        newMovie.setMovieGenres(genre.get());
-
-        MovieEntity entitySaved = movieRepository.save(newMovie);
-
-        MovieGenreDtoRes response = movieMapper.movieEntityToMovieDtoRes(entitySaved);
-
-        return response;
 
     }
 
