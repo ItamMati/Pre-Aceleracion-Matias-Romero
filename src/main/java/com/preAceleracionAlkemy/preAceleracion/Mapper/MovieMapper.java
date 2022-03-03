@@ -9,6 +9,7 @@ import java.util.List;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring", uses = {CharacterMapper.class, GenreMapper.class})
@@ -53,6 +54,18 @@ public interface MovieMapper {
     @InheritInverseConfiguration
     @Mapping(source = "movieGenres", target = "movieGenres")
     MovieGenreDtoRes movieEntityToMovieDtoRes(MovieEntity movie);
+    
+      //    /////////////////////////////////////EDIT///////////////////////////////////////////
+    @Mapping(source = "movieToEdit.image", target = "image")
+    @Mapping(source = "movieToEdit.title", target = "title")
+    @Mapping(source = "movieToEdit.dateOfCreation", target = "dateOfCreation")
+    @Mapping(source = "movieToEdit.calification", target = "calification")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "movieGenres", ignore = true)
+    MovieEntity movieDtoEditToMovieEntity(@MappingTarget MovieEntity movieEntity, MovieGenreDtoReq movieToEdit);
+
+    @InheritInverseConfiguration
+     MovieGenreDtoRes movieEntityToMovieDtoEdit(MovieEntity movie);
 }
 
  /////////////////////////////////MovieDtoReq and MovieDtoRes/////////////////////////

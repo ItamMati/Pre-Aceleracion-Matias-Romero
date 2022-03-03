@@ -39,15 +39,14 @@ public class CharacterEntity {
 
     private boolean deleted = Boolean.FALSE; //atributo que se agrega para trabajar con el softDelete
 
-    
     @ManyToMany(mappedBy = "movieCharacters")//Por default es LAZY
     private Set<MovieEntity> movieCharacters = new HashSet();
-    
+
     private Long idMovie;
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (object == null) {
             return false;
         }

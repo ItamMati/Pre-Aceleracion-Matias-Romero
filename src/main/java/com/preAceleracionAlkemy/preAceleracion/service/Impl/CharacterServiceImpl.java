@@ -9,14 +9,11 @@ import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoRes;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.dto.CharacterDtoSpecification;
 import com.preAceleracionAlkemy.preAceleracion.entity.CharacterEntity;
-import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
-
 import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;
 import com.preAceleracionAlkemy.preAceleracion.repository.CharacterRepository;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.CharacterSpecification;
 import com.preAceleracionAlkemy.preAceleracion.service.CharacterService;
 import com.preAceleracionAlkemy.preAceleracion.service.MovieService;
-import java.util.Arrays;
 import java.util.List;
 
 import java.util.Optional;
@@ -55,14 +52,15 @@ public class CharacterServiceImpl implements CharacterService {
                                 and(characterSpecification.getByWeight(characterFilterDto).
                                         and(characterSpecification.getByMovieId(characterFilterDto))))));
 
-        List<CharacterDtoList> resultDTO = characterMapper.listCharacterEntityToListCharacterDto(entityList);
-        return resultDTO;
+//        List<CharacterDtoList> resultDTO = characterMapper.listCharacterEntityToListCharacterDto(entityList);
+//        return resultDTO;
+        return null;
     }
 
     @Override
     public CharacterDtoDetails getCharacterDetails(Long id) {
         CharacterEntity dbChar = this.handleFindById(id);
-//        CharacterDtoDetails characterDetailsDto = characterMapper.characterEntityToCharacterDetailsDto(dbChar);
+//         CharacterDtoDetails characterDetailsDto = characterMapper.characterEntityToCharacterDetailsDto(dbChar);
         return null;
     }
 
@@ -72,11 +70,7 @@ public class CharacterServiceImpl implements CharacterService {
 
         CharacterEntity newCharacterEntity = characterMapper.characterDtoReqToEntity(characterDtoReq);
 
-//        movieService.handleFindById(characterDtoReq.getIdMovie()).addCharacterToMovie(newCharacterEntity);
-
-        MovieEntity movie = movieService.handleFindById(characterDtoReq.getIdMovie());
-        
-        newCharacterEntity.setMovieCharacters((Set<MovieEntity>) movie);
+        movieService.handleFindById(characterDtoReq.getIdMovie()).addCharacterToMovie(newCharacterEntity);
 
         CharacterEntity savedEntity = characterRepository.save(newCharacterEntity);
 
@@ -96,12 +90,13 @@ public class CharacterServiceImpl implements CharacterService {
 
     // == PUT ==
     @Override
-    public CharacterDtoEdit editCharacterById(Long id, CharacterDtoDetails charToEdit) {
+    public CharacterDtoEdit editCharacterById(Long id, CharacterDtoDetails newCharacterDto) {
 
-        CharacterEntity savedChar = this.handleFindById(id);
-//        CharacterDtoEdit editedChar = characterMapper.characterEntityToCharacterDtoEdit(characterRepository.save(characterMapper.toDto(savedChar, charToEdit)));
+        CharacterEntity characterEntity = this.handleFindById(id);
 
-        return null;
+        CharacterEntity editCharacter = characterRepository.save(characterMapper.characterDtoEdiToCharacterEntity(characterEntity, newCharacterDto));
+
+        return characterMapper.characterEntityToCharacterDtoEdit(editCharacter);
     }
 
     // == ERROR HANDLING ==

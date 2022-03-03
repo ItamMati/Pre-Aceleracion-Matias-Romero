@@ -1,7 +1,5 @@
 package com.preAceleracionAlkemy.preAceleracion.dto.response;
 
-import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
-import java.util.HashSet;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CharacterDtoRes {
-    
-     private Long id;
+
+    private Long id;
 
     private String imageUrl;
 
@@ -22,7 +20,8 @@ public class CharacterDtoRes {
 
     private String history;
 
-    private Set<MovieEntity> movieCharacters;
-    
-    
+//    Existen pero no van  //
+//    private Set<MovieEntity> movieCharacters = new HashSet();
+//
+//    private Long idMovie;
 }

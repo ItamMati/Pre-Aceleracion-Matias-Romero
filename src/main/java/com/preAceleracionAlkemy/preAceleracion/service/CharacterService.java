@@ -8,7 +8,7 @@ import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoRes;
 import java.util.List;
 import java.util.Set;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 public interface CharacterService {
 
@@ -16,7 +16,7 @@ public interface CharacterService {
 //    List<CharacterDto> getCharacterList();
     CharacterDtoDetails getCharacterDetails(Long id);
 
-    CharacterDtoRes save(CharacterDtoReq characterDtoReq);
+   CharacterDtoRes save(CharacterDtoReq characterDtoReq);
 
     void deleteCharacterById(Long id);
 

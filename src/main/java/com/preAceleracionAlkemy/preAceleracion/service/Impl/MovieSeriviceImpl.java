@@ -58,18 +58,16 @@ public class MovieSeriviceImpl implements MovieService {
 
     // == PUT ==
     @Override
-    public MovieGenreDtoRes editMovieById(Long id, MovieGenreDtoReq movieToEdit) {
-        MovieEntity savedMovie = this.handleFindById(id);
+    public MovieGenreDtoRes editMovieById(Long id, MovieGenreDtoReq  movieToEdit) {
+        
+        MovieEntity movieEntity = this.handleFindById(id);
 
-        savedMovie.setImage(movieToEdit.getImage());
-        savedMovie.setTitle(movieToEdit.getTitle());
-        savedMovie.setCalification(movieToEdit.getCalification());
-        savedMovie.setDateOfCreation(movieToEdit.getDateOfCreation());
-        Optional<GenreEntity> genre = genreRepository.findById(movieToEdit.getGenreId());
-        savedMovie.setMovieGenres(genre.get());
-        MovieEntity editedMovie = movieRepository.save(savedMovie);
-        MovieGenreDtoRes resultDTO = movieMapper.movieEntityToMovieDtoRes(editedMovie);
-        return resultDTO;
+ 
+
+        MovieEntity editMovie = movieRepository.save(movieMapper.movieDtoEditToMovieEntity(movieEntity, movieToEdit));
+
+        return movieMapper.movieEntityToMovieDtoEdit(editMovie);
+     
     }
 
     @Override
