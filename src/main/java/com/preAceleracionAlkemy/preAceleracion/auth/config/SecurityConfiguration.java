@@ -21,20 +21,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsCustomService userDetailsCustomService;
-
+    
+  
     private JwtRequestFilter jwtRequestFilter;
-
-    @Autowired
+    
+      @Autowired
     public SecurityConfiguration(@Lazy JwtRequestFilter jwtRequestFilter) {
         this.jwtRequestFilter = jwtRequestFilter;
     }
-
-    @Override
+ 
+    
+     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userDetailsCustomService).passwordEncoder(passwordEncoder());
 
     }
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -48,12 +51,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+   
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.csrf().disable().
                 authorizeHttpRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
                 .and().sessionManagement()
