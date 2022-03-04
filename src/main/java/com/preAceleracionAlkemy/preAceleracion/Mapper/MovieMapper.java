@@ -44,6 +44,8 @@ public interface MovieMapper {
 
     @InheritInverseConfiguration
      MovieGenreDtoRes movieEntityToMovieDtoEdit(MovieEntity movie);
+     
+      ///////////////////////////////////////EDIT///////////////////////////////////////////
 }
 
 

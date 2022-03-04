@@ -18,8 +18,7 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring", uses = {MovieMapper.class})
 public interface CharacterMapper {
-    
-    
+
     List<CharacterDtoList> characterEntityToCharacterDtoList(List<CharacterEntity> characterEntity);
 
     ///////////////////////////////////////EDIT///////////////////////////////////////////
@@ -33,26 +32,15 @@ public interface CharacterMapper {
 
     @InheritInverseConfiguration
     CharacterDtoEdit characterEntityToCharacterDtoEdit(CharacterEntity character);
- ///////////////////////////////////////EDIT///////////////////////////////////////////
-    
-     ///////////////////////////////////////REQUEST///////////////////////////////////////////
+    ///////////////////////////////////////EDIT///////////////////////////////////////////
+
     CharacterEntity characterDtoReqToEntity(CharacterDtoReq characterDto);
-    ///////////////////////////////////////REQUEST///////////////////////////////////////////
+
     @InheritInverseConfiguration
     CharacterDtoRes characterEntityToCharacterDtoRes(CharacterEntity characterEntity);
-    
-    
 
     Set<CharacterEntity> characterDtoForMovieToEntityCharacter(Set<CharacterDtoForMovie> characterDto);
 
     CharacterDtoDetails characterEntityToCharacterDtoDetails(CharacterEntity characterEntity);
-    
-    
-     ///////////////////////////////////////lIST///////////////////////////////////////////
-    
-   
+
 }
-
-
-
-

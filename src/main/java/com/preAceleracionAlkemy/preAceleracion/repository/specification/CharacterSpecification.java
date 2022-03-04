@@ -63,7 +63,7 @@ public class CharacterSpecification {
 
         return (root, query, criteriaBuilder) -> {
 
-            if (characterFilterDto.getMovies()==null) {
+            if (characterFilterDto.getMovies() == null) {
 
                 return criteriaBuilder.conjunction();
 
