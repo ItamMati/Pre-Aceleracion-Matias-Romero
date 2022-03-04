@@ -58,8 +58,8 @@ public class CharacterController {
     // == POST ==	
     // == PUT ==	
     @PutMapping("/{id}")
-    public ResponseEntity<CharacterDtoEdit> editCharacter(@PathVariable Long id, @RequestBody CharacterDtoDetails charToEdit) {
-        CharacterDtoEdit editedChar = characterService.editCharacterById(id, charToEdit);
+    public ResponseEntity<CharacterDtoEdit> editCharacter(@PathVariable Long id, @Valid @RequestBody CharacterDtoReq editCharacter) {
+        CharacterDtoEdit editedChar = characterService.editCharacterById(id, editCharacter);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedChar);
     }
     // == PUT ==

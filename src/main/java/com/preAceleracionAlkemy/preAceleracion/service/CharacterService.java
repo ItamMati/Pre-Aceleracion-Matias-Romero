@@ -20,7 +20,7 @@ public interface CharacterService {
 
     void deleteCharacterById(Long id);
 
-    CharacterDtoEdit editCharacterById(Long id, CharacterDtoDetails charToEdit);
+    CharacterDtoEdit editCharacterById(Long id, CharacterDtoReq charToEdit);
 
     List<CharacterDtoList> getByFilters(String name, Integer age, Double weight, Set<Long> idMovie);
 

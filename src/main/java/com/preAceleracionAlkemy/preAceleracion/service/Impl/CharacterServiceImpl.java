@@ -93,11 +93,11 @@ public class CharacterServiceImpl implements CharacterService {
 
     // == PUT ==
     @Override
-    public CharacterDtoEdit editCharacterById(Long id, CharacterDtoDetails newCharacterDto) {
+    public CharacterDtoEdit editCharacterById(Long id, CharacterDtoReq editCharacterDto) {
 
         CharacterEntity characterEntity = this.handleFindById(id);
 
-        CharacterEntity editCharacter = characterRepository.save(characterMapper.characterDtoEdiToCharacterEntity(characterEntity, newCharacterDto));
+        CharacterEntity editCharacter = characterRepository.save(characterMapper.characterDtoEdiToCharacterEntity(characterEntity, editCharacterDto));
 
         return characterMapper.characterEntityToCharacterDtoEdit(editCharacter);
     }

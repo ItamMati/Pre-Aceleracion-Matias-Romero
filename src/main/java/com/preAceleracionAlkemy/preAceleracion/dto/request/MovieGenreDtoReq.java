@@ -7,6 +7,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class MovieGenreDtoReq {
 
     @NotEmpty
+    @NotNull
     private String image;
 
     @Size(min = 2, max = 30)
@@ -25,16 +27,18 @@ public class MovieGenreDtoReq {
     private String title;
 
     @NotNull
+    @DateTimeFormat(style="yyyy/MM/dd")
     private LocalDate dateOfCreation;
 
     @NotNull
     @Min(1)
     @Max(5)
+    @NotEmpty
     private String calification; //1 a 5
 
     @NotNull(message = "Debe asociar la pelicula a un genero")
     private Long genreId;
 
-    private Set<CharacterDtoForMovie> characters;
+//    private Set<CharacterDtoForMovie> characters;
 
 }

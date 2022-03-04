@@ -21,8 +21,5 @@ public class CharacterDtoRes {
 
     private String history;
 
-//    Existen pero no van  //
-//    private Set<MovieEntity> movieCharacters = new HashSet();
-//
-//    private Long idMovie;
+
 }

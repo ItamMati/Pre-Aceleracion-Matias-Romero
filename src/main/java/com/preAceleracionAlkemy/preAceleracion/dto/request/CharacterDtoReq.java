@@ -1,5 +1,7 @@
 package com.preAceleracionAlkemy.preAceleracion.dto.request;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
@@ -21,6 +23,7 @@ public class CharacterDtoReq {
     @NotNull(message = "El atributo no puede ser null")
     private String history;
     @NotNull(message = "El atributo no puede ser null")
+    @Min(0)
     private Long idMovie;
 
 }

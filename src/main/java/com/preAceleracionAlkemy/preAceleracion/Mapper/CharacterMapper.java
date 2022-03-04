@@ -29,7 +29,7 @@ public interface CharacterMapper {
     @Mapping(source = "charToEdit.weight", target = "weight")
     @Mapping(source = "charToEdit.history", target = "history")
     @Mapping(target = "id", ignore = true)
-    CharacterEntity characterDtoEdiToCharacterEntity(@MappingTarget CharacterEntity characterEntity, CharacterDtoDetails charToEdit);
+    CharacterEntity characterDtoEdiToCharacterEntity(@MappingTarget CharacterEntity characterEntity, CharacterDtoReq charToEdit);
 
     @InheritInverseConfiguration
     CharacterDtoEdit characterEntityToCharacterDtoEdit(CharacterEntity character);

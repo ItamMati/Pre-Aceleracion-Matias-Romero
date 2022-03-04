@@ -52,7 +52,7 @@ public class MovieSeriviceImpl implements MovieService {
 
         newMovie.setMovieGenres(genre.get());
 
-        newMovie.setMovieCharacters(characterMapper.characterDtoForMovieToEntityCharacter(movieDto.getCharacters()));
+//        newMovie.setMovieCharacters(characterMapper.characterDtoForMovieToEntityCharacter(movieDto.getCharacters()));
 
         MovieEntity entitySaved = movieRepository.save(newMovie);
 
