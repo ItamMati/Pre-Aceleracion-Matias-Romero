@@ -59,5 +59,7 @@ public class CharacterEntity {
         return Objects.equals(other.id, this.id);
 
     }
+    
+    
 
 }

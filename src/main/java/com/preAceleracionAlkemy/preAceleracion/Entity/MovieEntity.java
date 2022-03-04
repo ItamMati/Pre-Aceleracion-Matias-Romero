@@ -43,7 +43,7 @@ public class MovieEntity {
     private boolean deleted = Boolean.FALSE; //atributo que se agrega para trabajar con el softDelete
 //
 
-    @ManyToMany(cascade = CascadeType.ALL)// Una pelicula tiene muchos actores, y un actor está en muchas peliculas.
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})// Una pelicula tiene muchos actores, y un actor está en muchas peliculas.
     //Entiendo que actualiza los estados de los atributos de la tabla, en donde este se repite,
     //                                      y los devuelve siempre y cuando existan.  
     //                                      Y sino existe, los crea y entiendo que devuelve.  

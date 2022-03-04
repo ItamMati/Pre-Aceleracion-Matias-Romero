@@ -44,6 +44,9 @@ public class CharacterServiceImpl implements CharacterService {
     // == POST ==
     @Override
     public CharacterDtoRes save(CharacterDtoReq characterDtoReq) {
+        
+           Optional<CharacterEntity> matchingCharacter = characterRepository.findByName(characterDtoReq.getName());
+        if (matchingCharacter.isPresent()) throw new IllegalArgumentException("El personaje ya existe");
 
         CharacterEntity newCharacterEntity = characterMapper.characterDtoReqToEntity(characterDtoReq);
 

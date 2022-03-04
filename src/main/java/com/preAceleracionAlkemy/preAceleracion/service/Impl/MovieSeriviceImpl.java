@@ -42,6 +42,9 @@ public class MovieSeriviceImpl implements MovieService {
 
     @Override
     public MovieGenreDtoRes save(MovieGenreDtoReq movieDto) {
+        
+              Optional<MovieEntity> matchingMovie = movieRepository.findByTitle(movieDto.getTitle());
+        if (matchingMovie.isPresent()) throw new IllegalArgumentException("La pelicula ya existe");
 
         MovieEntity newMovie = movieMapper.movieDtoReqToEntity(movieDto);
 
