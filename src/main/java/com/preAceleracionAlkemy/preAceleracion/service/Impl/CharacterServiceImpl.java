@@ -68,7 +68,7 @@ public class CharacterServiceImpl implements CharacterService {
                                         and(characterSpecification.getByMovieId(characterFilterDto))))));
 
         List<CharacterDtoList> resultDTO = characterMapper.characterEntityToCharacterDtoList(entityList);
-        
+
         return resultDTO;
     }
 

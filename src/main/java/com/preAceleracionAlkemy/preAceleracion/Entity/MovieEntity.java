@@ -1,6 +1,7 @@
 package com.preAceleracionAlkemy.preAceleracion.entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -60,6 +61,24 @@ public class MovieEntity {
     private GenreEntity movieGenres;
 
     private Long genreId;
+    
+    
+        @Override
+    public boolean equals(Object object) {
+
+        if (object == null) {
+            return false;
+        }
+
+        if (getClass() != object.getClass()) {
+            return false;
+        }
+
+        final MovieEntity other = (MovieEntity) object;
+
+        return Objects.equals(other.id, this.id);
+
+    }
 
     // :::: Methods ::::	
     // Characters:

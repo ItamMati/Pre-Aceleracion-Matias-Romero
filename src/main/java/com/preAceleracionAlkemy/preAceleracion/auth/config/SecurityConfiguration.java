@@ -2,7 +2,6 @@ package com.preAceleracionAlkemy.preAceleracion.auth.config;
 
 import com.preAceleracionAlkemy.preAceleracion.auth.filter.JwtRequestFilter;
 import com.preAceleracionAlkemy.preAceleracion.auth.service.UserDetailsCustomService;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;

@@ -32,7 +32,7 @@ public class MovieGenreDtoReq {
     @Max(5)
     private String calification; //1 a 5
 
-    @NotNull
+    @NotNull(message = "Debe asociar la pelicula a un genero")
     private Long genreId;
 
     private Set<CharacterDtoForMovie> characters;

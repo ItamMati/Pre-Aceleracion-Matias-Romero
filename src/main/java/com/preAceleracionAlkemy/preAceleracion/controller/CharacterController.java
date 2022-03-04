@@ -46,6 +46,7 @@ public class CharacterController {
         CharacterDtoDetails characterDetails = characterService.getCharacterDetails(id);
         return ResponseEntity.status(HttpStatus.OK).body(characterDetails);
     }
+
     // == GET ==
     // == POST ==	
     @PostMapping()
@@ -53,6 +54,7 @@ public class CharacterController {
         CharacterDtoRes createdChar = characterService.save(newCharacter);
         return ResponseEntity.status(HttpStatus.OK).body(createdChar);
     }
+
     // == POST ==	
     // == PUT ==	
     @PutMapping("/{id}")
@@ -60,12 +62,13 @@ public class CharacterController {
         CharacterDtoEdit editedChar = characterService.editCharacterById(id, charToEdit);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedChar);
     }
-   // == PUT ==
+    // == PUT ==
     // == DELETE ==	
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         characterService.deleteCharacterById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
- // == DELETE ==
+    // == DELETE ==
 }
