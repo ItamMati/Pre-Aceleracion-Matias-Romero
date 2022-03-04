@@ -6,6 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class CharacterDtoRes {
 
     private Long id;

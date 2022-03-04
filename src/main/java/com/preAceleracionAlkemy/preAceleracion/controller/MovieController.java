@@ -28,9 +28,9 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    //EndPoint GET//
+    // == GET ==	
     @GetMapping()
-    public ResponseEntity<List<MovieDtoList>> findAll(@RequestParam(required = false) String title,
+    public ResponseEntity<List<MovieDtoList>> getMovies(@RequestParam(required = false) String title,
             @RequestParam(required = false) String genre,
             @RequestParam(required = false, defaultValue = "ASC") String order,
             @RequestParam(required = false) Date date) {
@@ -42,11 +42,13 @@ public class MovieController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<MovieDtoDetails> getMovieDetailsDtoById(@PathVariable Long id) {
+    public ResponseEntity<MovieDtoDetails> getMovieDetailsById(@PathVariable Long id) {
         MovieDtoDetails movieDetailsResponse = movieService.getMovieDetails(id);
         return ResponseEntity.status(HttpStatus.OK).body(movieDetailsResponse);
     }
 
+    // == GET ==
+    // == POST ==
     @PostMapping()
     public ResponseEntity<MovieGenreDtoRes> save(@Valid @RequestBody MovieGenreDtoReq movie) {
 
@@ -54,21 +56,24 @@ public class MovieController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newMovie);
 
-
     }
 
+    // == POST ==
+    
+    
     // == PUT ==	
     @PutMapping("/{id}")
-    public ResponseEntity<MovieGenreDtoRes> editCharacter(@PathVariable Long id,@Valid @RequestBody MovieGenreDtoReq charToEdit) {
+    public ResponseEntity<MovieGenreDtoRes> editMovie(@PathVariable Long id, @Valid @RequestBody MovieGenreDtoReq charToEdit) {
         MovieGenreDtoRes editedChar = movieService.editMovieById(id, charToEdit);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedChar);
     }
-
+    // == PUT ==
     // == DELETE ==	
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         movieService.deleteMovieById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
+    // == DELETE ==	
 }

@@ -6,6 +6,7 @@ import lombok.*;
 
 @Getter
 @Setter
+
 public class CharacterDtoDetails {
 
     private Long id;

@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
+
 public class MovieDtoList {
 
     private String image;

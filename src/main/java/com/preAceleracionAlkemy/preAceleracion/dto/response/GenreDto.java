@@ -4,6 +4,7 @@ import lombok.*;
 
 @Getter
 @Setter
+
 public class GenreDto {
     
      private Long id;

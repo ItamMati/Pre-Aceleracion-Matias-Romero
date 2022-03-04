@@ -15,7 +15,7 @@ public class AuthenticationRequest {
     @NotNull
     @NotEmpty
     private String username;
-    @Size(min = 4, message = "The password must contain at least 8 characters")
+    @Size(min = 8, message = "The password must contain at least 8 characters")
     @NotNull
     @NotEmpty
     private String password;

@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class CharacterDtoList {
 
     private String imageUrl;

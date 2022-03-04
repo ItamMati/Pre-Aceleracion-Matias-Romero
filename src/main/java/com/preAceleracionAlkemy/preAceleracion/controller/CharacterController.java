@@ -8,6 +8,7 @@ import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoRes;
 import com.preAceleracionAlkemy.preAceleracion.service.CharacterService;
 import java.util.List;
 import java.util.Set;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class CharacterController {
     private CharacterService characterService;
 
     // == GET ==		
-    @GetMapping("")
+    @GetMapping()
     public ResponseEntity<List<CharacterDtoList>> getCharacters(@RequestParam(required = false) String name,
             @RequestParam(required = false) Integer age,
             @RequestParam(required = false) Double weight,
@@ -41,30 +42,30 @@ public class CharacterController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CharacterDtoDetails> getCharacterDetailsDtoById(@PathVariable Long id) {
+    public ResponseEntity<CharacterDtoDetails> getCharacterDetailsById(@PathVariable Long id) {
         CharacterDtoDetails characterDetails = characterService.getCharacterDetails(id);
         return ResponseEntity.status(HttpStatus.OK).body(characterDetails);
     }
-
+    // == GET ==
     // == POST ==	
     @PostMapping()
-    public ResponseEntity<CharacterDtoRes> save(@RequestBody CharacterDtoReq newCharacter) {
+    public ResponseEntity<CharacterDtoRes> save(@Valid @RequestBody CharacterDtoReq newCharacter) {
         CharacterDtoRes createdChar = characterService.save(newCharacter);
         return ResponseEntity.status(HttpStatus.OK).body(createdChar);
     }
-
+    // == POST ==	
     // == PUT ==	
     @PutMapping("/{id}")
     public ResponseEntity<CharacterDtoEdit> editCharacter(@PathVariable Long id, @RequestBody CharacterDtoDetails charToEdit) {
         CharacterDtoEdit editedChar = characterService.editCharacterById(id, charToEdit);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(editedChar);
     }
-
+   // == PUT ==
     // == DELETE ==	
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         characterService.deleteCharacterById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
+ // == DELETE ==
 }
