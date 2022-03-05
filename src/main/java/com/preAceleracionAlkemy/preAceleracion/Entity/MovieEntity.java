@@ -61,9 +61,8 @@ public class MovieEntity {
     private GenreEntity movieGenres;
 
     private Long genreId;
-    
-    
-        @Override
+
+    @Override
     public boolean equals(Object object) {
 
         if (object == null) {

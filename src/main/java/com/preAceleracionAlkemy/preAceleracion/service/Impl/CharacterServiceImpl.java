@@ -9,6 +9,7 @@ import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoRes;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.dto.CharacterDtoSpecification;
 import com.preAceleracionAlkemy.preAceleracion.entity.CharacterEntity;
+import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import com.preAceleracionAlkemy.preAceleracion.exception.ParamNotFound;
 import com.preAceleracionAlkemy.preAceleracion.repository.CharacterRepository;
 import com.preAceleracionAlkemy.preAceleracion.repository.specification.CharacterSpecification;
@@ -44,9 +45,11 @@ public class CharacterServiceImpl implements CharacterService {
     // == POST ==
     @Override
     public CharacterDtoRes save(CharacterDtoReq characterDtoReq) {
-        
-           Optional<CharacterEntity> matchingCharacter = characterRepository.findByName(characterDtoReq.getName());
-        if (matchingCharacter.isPresent()) throw new IllegalArgumentException("El personaje ya existe");
+
+        Optional<CharacterEntity> matchingCharacter = characterRepository.findByName(characterDtoReq.getName());
+        if (matchingCharacter.isPresent()) {
+            throw new IllegalArgumentException("El personaje ya existe");
+        }
 
         CharacterEntity newCharacterEntity = characterMapper.characterDtoReqToEntity(characterDtoReq);
 
@@ -93,7 +96,7 @@ public class CharacterServiceImpl implements CharacterService {
 
     // == PUT ==
     @Override
-    public CharacterDtoEdit editCharacterById(Long id, CharacterDtoReq editCharacterDto) {
+    public CharacterDtoRes editCharacterById(Long id, CharacterDtoEdit editCharacterDto) {
 
         CharacterEntity characterEntity = this.handleFindById(id);
 

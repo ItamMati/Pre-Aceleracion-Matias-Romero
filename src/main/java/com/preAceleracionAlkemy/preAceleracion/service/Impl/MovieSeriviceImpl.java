@@ -37,22 +37,20 @@ public class MovieSeriviceImpl implements MovieService {
     @Autowired
     private MovieSpecification movieSpecification;
 
-    @Autowired
-    private CharacterMapper characterMapper;
 
     @Override
     public MovieGenreDtoRes save(MovieGenreDtoReq movieDto) {
-        
-              Optional<MovieEntity> matchingMovie = movieRepository.findByTitle(movieDto.getTitle());
-        if (matchingMovie.isPresent()) throw new IllegalArgumentException("La pelicula ya existe");
+
+        Optional<MovieEntity> matchingMovie = movieRepository.findByTitle(movieDto.getTitle());
+        if (matchingMovie.isPresent()) {
+            throw new IllegalArgumentException("La pelicula ya existe");
+        }
 
         MovieEntity newMovie = movieMapper.movieDtoReqToEntity(movieDto);
 
         Optional<GenreEntity> genre = genreRepository.findById(movieDto.getGenreId());
 
         newMovie.setMovieGenres(genre.get());
-
-//        newMovie.setMovieCharacters(characterMapper.characterDtoForMovieToEntityCharacter(movieDto.getCharacters()));
 
         MovieEntity entitySaved = movieRepository.save(newMovie);
 

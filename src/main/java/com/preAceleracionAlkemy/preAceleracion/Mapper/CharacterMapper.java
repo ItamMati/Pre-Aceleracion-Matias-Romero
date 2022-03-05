@@ -8,6 +8,7 @@ import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoList;
 
 import com.preAceleracionAlkemy.preAceleracion.dto.response.CharacterDtoRes;
 import com.preAceleracionAlkemy.preAceleracion.entity.CharacterEntity;
+import com.preAceleracionAlkemy.preAceleracion.entity.MovieEntity;
 import java.util.List;
 import java.util.Set;
 
@@ -28,10 +29,10 @@ public interface CharacterMapper {
     @Mapping(source = "charToEdit.weight", target = "weight")
     @Mapping(source = "charToEdit.history", target = "history")
     @Mapping(target = "id", ignore = true)
-    CharacterEntity characterDtoEdiToCharacterEntity(@MappingTarget CharacterEntity characterEntity, CharacterDtoReq charToEdit);
+    CharacterEntity characterDtoEdiToCharacterEntity(@MappingTarget CharacterEntity characterEntity, CharacterDtoEdit charToEdit);
 
     @InheritInverseConfiguration
-    CharacterDtoEdit characterEntityToCharacterDtoEdit(CharacterEntity character);
+    CharacterDtoRes characterEntityToCharacterDtoEdit(CharacterEntity character);
     ///////////////////////////////////////EDIT///////////////////////////////////////////
 
     CharacterEntity characterDtoReqToEntity(CharacterDtoReq characterDto);
@@ -42,5 +43,9 @@ public interface CharacterMapper {
     Set<CharacterEntity> characterDtoForMovieToEntityCharacter(Set<CharacterDtoForMovie> characterDto);
 
     CharacterDtoDetails characterEntityToCharacterDtoDetails(CharacterEntity characterEntity);
+    
+    
+
+
 
 }
