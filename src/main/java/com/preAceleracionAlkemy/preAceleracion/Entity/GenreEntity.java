@@ -25,9 +25,9 @@ public class GenreEntity {
     private String name;
 
     private String imageUrl;
-//
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "movieGenres")
-//    @JsonIgnore
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "movieGenres")//Por default es LAZY
+
     private Set<MovieEntity> movies;
 
 }

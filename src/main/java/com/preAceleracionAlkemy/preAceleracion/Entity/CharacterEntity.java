@@ -20,8 +20,8 @@ import org.hibernate.annotations.Where;
 @Table(name = "characters")
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE characters SET deleted = true WHERE id=?")// Se debe declarar para aplicar el SoftDelete
-@Where(clause = "deleted=false")// Esta etiqueta sirve para que no liste los objetos a los cuales se les aplico el softDelete
+@SQLDelete(sql = "UPDATE characters SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class CharacterEntity {
 
     @Id
@@ -38,7 +38,7 @@ public class CharacterEntity {
 
     private String history;
 
-    private boolean deleted = Boolean.FALSE; //atributo que se agrega para trabajar con el softDelete
+    private boolean deleted = Boolean.FALSE; 
 
     @ManyToMany(mappedBy = "movieCharacters", cascade = {CascadeType.PERSIST, CascadeType.MERGE})//Por default es LAZY
     private Set<MovieEntity> movieCharacters = new HashSet();
